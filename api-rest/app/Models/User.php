@@ -48,15 +48,15 @@ class User extends Authenticatable implements JWTSubject
     }
     public function getJWTCustomClaims()
     {
-        $agent = Agent::where('id_user', $this->id)->first();
+        //$agent = Agent::where('id_user', $this->id)->first();
 
         return [
             "user" => [
                 "id" => $this->id,
                 "name" => $this->name,
                 "email" => $this->email,
-                "phoneNumber" => $agent ? $agent->phone : 'Sin teléfono',
-                "collectorId" => $agent ? $agent->id : 0,
+                //"phoneNumber" => $agent ? $agent->phone : 'Sin teléfono',
+                //"collectorId" => $agent ? $agent->id : 0,
             ],
         ];
     }
