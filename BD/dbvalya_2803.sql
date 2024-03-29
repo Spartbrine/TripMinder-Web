@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-03-2024 a las 07:32:49
+-- Tiempo de generación: 29-03-2024 a las 02:09:57
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -212,6 +212,14 @@ CREATE TABLE `profiles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `profiles`
+--
+
+INSERT INTO `profiles` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', '2024-03-27 05:20:45', '2024-03-27 05:20:45'),
+(2, 'Admin', '2024-03-27 05:20:45', '2024-03-27 05:20:45');
+
 -- --------------------------------------------------------
 
 --
@@ -241,6 +249,15 @@ CREATE TABLE `transport_types` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `transport_types`
+--
+
+INSERT INTO `transport_types` (`id`, `type`, `created_at`, `updated_at`) VALUES
+(1, 'Nueva camioneta 1', '2024-03-29 05:13:25', '2024-03-29 06:42:45'),
+(2, 'Camioneta Uno', '2024-03-29 05:39:36', '2024-03-29 05:39:36'),
+(3, 'Camioneta 1', '2024-03-29 05:45:20', '2024-03-29 05:45:20');
 
 -- --------------------------------------------------------
 
@@ -280,6 +297,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `profile`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Administrador', 'admin@correo.com', NULL, '$2y$10$TKm640CSG/G4LjFR5UzzMOUfTq/eAfkstHknDfk4f2aHzxKE9iNLG', 1, NULL, '2024-03-26 15:06:55', '2024-03-26 15:06:55');
 
 -- --------------------------------------------------------
 
@@ -487,7 +511,7 @@ ALTER TABLE `points`
 -- AUTO_INCREMENT de la tabla `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `responsibles`
@@ -499,7 +523,7 @@ ALTER TABLE `responsibles`
 -- AUTO_INCREMENT de la tabla `transport_types`
 --
 ALTER TABLE `transport_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `trips`
@@ -511,7 +535,7 @@ ALTER TABLE `trips`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `vehicles`

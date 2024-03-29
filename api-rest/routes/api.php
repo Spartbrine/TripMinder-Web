@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Authenticate;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransportTypeController;
+use App\Http\Controllers\VehicleController;
+use App\Models\TransportType;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,7 +21,8 @@ use App\Http\Controllers\ProfileController;
 */
 Route::middleware(Authenticate::class)->resource('users', UserController::class);
 Route::middleware(Authenticate::class)->resource('profiles', ProfileController::class);
-
+Route::middleware(Authenticate::class)->resource('transporttypes', TransportTypeController::class);
+Route::middleware(Authenticate::class)->resource('vehicles', VehicleController::class);
 
 Route::put('users/profile/{id}', 'App\Http\Controllers\UserController@updateOnlyProfile');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -22,7 +22,7 @@ class Vehicle extends Model
         'km_x_liter',
         'capacity'
     ];
-    public function transportType()
+    public function transporttype()
     {
         return $this->hasOne(TransportType::class, 'id', 'id_transport_type');
     }
