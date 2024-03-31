@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-03-2024 a las 02:09:57
+-- Tiempo de generación: 01-04-2024 a las 00:25:49
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -41,10 +41,10 @@ CREATE TABLE `clients` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `companys`
+-- Estructura de tabla para la tabla `companies`
 --
 
-CREATE TABLE `companys` (
+CREATE TABLE `companies` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -330,6 +330,13 @@ CREATE TABLE `vehicles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Volcado de datos para la tabla `vehicles`
+--
+
+INSERT INTO `vehicles` (`id`, `id_transport_type`, `economic_number`, `num_license`, `plates`, `brand`, `model`, `year`, `color`, `Insurance_carrier`, `insurance_policy`, `km_x_liter`, `capacity`, `created_at`, `updated_at`) VALUES
+(1, 1, '4444', '4444', '4444', 'Ford4', '444', '2020', 'Azul f', 'Qualitys', '4444', '18.00', '21.00', '2024-03-29 12:54:50', '2024-03-29 13:03:58');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -340,9 +347,9 @@ ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `companys`
+-- Indices de la tabla `companies`
 --
-ALTER TABLE `companys`
+ALTER TABLE `companies`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `companys_email_unique` (`email`);
 
@@ -454,9 +461,9 @@ ALTER TABLE `clients`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `companys`
+-- AUTO_INCREMENT de la tabla `companies`
 --
-ALTER TABLE `companys`
+ALTER TABLE `companies`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -541,7 +548,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

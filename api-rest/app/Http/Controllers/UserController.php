@@ -62,7 +62,7 @@ class UserController extends CatalogController
             return $this->sendError('Validation Error.', $validator->errors());
         } else {
             $input['password'] = bcrypt($input['password']);
-            $obj = $this->clazz()::create($input);
+            $obj = $this->clase()::create($input);
             return $this->sendResponse([$obj], 'success');
         }
     }
@@ -121,7 +121,7 @@ class UserController extends CatalogController
     public function destroy($id)
     {
         //
-        $object = $this->clazz()::find($id);
+        $object = $this->clase()::find($id);
         if ($object !== null) {
             $object->delete();
 
