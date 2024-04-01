@@ -1,0 +1,77 @@
+@import 'core.scss';
+@import "modules/login.scss";
+$base-img-url: "../../assets/images";
+$responsive-img-url: "../assets/images";
+$assets-url: "../../assets";
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 0;
+}
+
+@import "modules/_layout.scss";
+@import 'modules/_header.scss';
+@import 'modules/_split-view.scss';
+//UI Components
+@import "icons.scss";
+@import "modules/_typography.scss";
+@import 'modules/_breadcrumb.scss';
+@import "modules/_buttons.scss";
+@import "modules/_alerts.scss";
+@import "modules/_notifications.scss";
+@import "modules/_tabs_accordian.scss";
+@import "modules/_progress_indicators.scss";
+//View
+@import "modules/_view.scss";
+//Cards
+@import "modules/_cards.scss";
+//Form Elements
+@import "modules/_form_elements.scss";
+//List
+@import "modules/_list.scss";
+//Z-indexes
+@import "modules/z_index.scss";
+//Misc
+@import "modules/_misc.scss";
+//Responsive Classes
+@import "_responsive.scss";
+//Utils
+@import "utils.scss";
+//Vendor
+@import "vendor/perfect-scroller.scss";
+@import "vendor/ngx-nvd3.scss";
+@import "../../../../../colors.scss";
+
+.img-login {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    box-sizing: border-box;
+    display: block;
+}
+
+.palette-top {
+    height: 0.5em;
+    border-top: 0;
+    border-radius: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.alert-danger,
+.alert-error {
+    background-color: #4d4d4d;
+    color: #ffffff;
+    border-color: rgb(77 77 77 / 48%);
+}
+
+.margin-palette {
+    margin-bottom: 30px;
+}
+
+.h6 {
+    font-size: 1.5rem;
+}
+
+.btn-login {
+    padding: 15px;
+    width: 100%;
+}

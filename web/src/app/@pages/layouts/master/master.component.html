@@ -1,0 +1,99 @@
+<div class="container" *ngIf="_boxed; else basicLayoutBlock">
+    <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+</div>
+<ng-template #basicLayoutBlock>
+    <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+</ng-template>
+
+<ng-template #contentTpl>
+    <pg-sidebar>
+        <ng-template #sideBarHeader>
+            <img src="{{configuration.image_sidebarlogo}}" alt="logo" class="brand" pgRetina src1x="{{configuration.image_sidebarlogo}}" src2x="{{configuration.image_sidebarlogo}}" width="100" height="45" >
+            <div class="sidebar-header-controls">
+                <button type="button" class="btn btn-icon-link invert sidebar-slide-toggle m-l-20 m-r-10" [class.active]="_menuDrawerOpen" (click)="toggleMenuDrawer()">
+                    <i class="pg-icon">chevron_down</i>
+                </button>
+                <button type="button" class="btn btn-icon-link invert d-lg-inline-block d-xlg-inline-block d-md-inline-block d-sm-none d-none" data-toggle-pin="sidebar" (click)="toggleMenuPin()">
+                    <i class="pg-icon"></i>
+                </button>
+            </div>
+        </ng-template>
+        <ng-template #menuItems>
+            <pg-menu-items [user]="user" [Items]="menuLinks"></pg-menu-items>
+        </ng-template>
+    </pg-sidebar>
+    <page-container>
+        <pg-header [boxed]="_boxed">
+            <!-- START MOBILE SIDEBAR TOGGLE -->
+            <a href="javascript:void(0);" class="btn-icon-link toggle-sidebar d-lg-none" (click)="toggleMobileSidebar()">
+                <i class="pg-icon">menu</i>
+            </a>
+            <!-- END MOBILE SIDEBAR TOGGLE -->
+            <div class="">
+                <div class="brand inline p-l-20" [class.d-none]="_layoutOption === 'email'">
+                    <img src="{{configuration.image_headerlogo}}" alt="logo" pgRetina src1x="{{configuration.image_headerlogo}}" src2x="{{configuration.image_headerlogo}}" width="150" height="48" >
+                </div>
+                <!-- PINNED ICONS-->
+                <!--ul class="d-lg-inline-block d-none notification-list no-margin  b-grey b-l b-r no-style p-l-20 p-r-20">
+                    <li class="p-r-10 inline">
+                        <div class="dropdown" dropdown>
+                            <a id="notification-center" class="header-icon btn-icon-link" dropdownToggle [routerLink]="['/students']">
+                                <fa-icon icon="graduation-cap"></fa-icon>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="p-r-10 inline">
+                        <a class="header-icon btn-icon-link" [routerLink]="['/califRegister']">
+                            <i class="pg-icon">text_add</i>
+                        </a>
+                    </li>
+                </ul-->
+                <!-- END PINNED ICONS -->
+            </div>
+            <div class="d-flex align-items-center">
+                <!-- START User Info-->
+                <div class="dropdown pull-right" dropdown>
+                    <button class="profile-dropdown-toggle" type="button" dropdownToggle id="profileDropdown" aria-label="profile dropdown">
+                        <span class="thumbnail-wrapper d32 circular inline">
+                            <img src="assets/img/profile.svg" alt="" pgRetina src1x="assets/img/profile.svg" src2x="assets/img/profile.svg" width="32" height="32">
+                        </span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right profile-dropdown" *dropdownMenu role="menu">
+                        <a class="dropdown-item"><span>Conectado como <br /><b>{{user.name}}</b></span></a>
+                        <!--div class="dropdown-divider" *ngIf="isTeacher"></div>
+                        <a class="dropdown-item" [routerLink]="['/profile']" *ngIf="isTeacher">Perfil</a-->
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" [routerLink]="['/account']">Cuenta</a>
+                        <a class="dropdown-item" [routerLink]="['/config']" *ngIf="isAdmin">Ajustes</a>
+                        <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Salir</a>
+                    </div>
+                </div>
+                <!-- END User Info-->
+                <!-- <a href="javascript:void(0)" class="header-icon btn-icon-link m-l-5 sm-no-margin d-inline-block btn-icon-link" (click)="onClickNotification($event)">
+                    <i class="material-icons">notifications</i>
+                    <span class="bubble" *ngIf="showNotification"></span>
+                </a> -->
+            </div>
+        </pg-header>
+        <div class="page-content-wrapper {{_pageContainerClass}}">
+            <!-- START PAGE CONTENT -->
+            <div class="content {{_contentClass}}">
+                <router-outlet></router-outlet>
+            </div>
+            <!-- END PAGE CONTENT -->
+            <!-- START COPYRIGHT -->
+            <ng-template [ngIf]="_footer">
+                <div class=" container-fluid container-fixed-lg footer">
+                    <div class="copyright sm-text-center">
+                        <p class="small no-margin pull-left sm-pull-reset">
+                            <span class="hint-text">Copyright &copy; 2020</span>&nbsp;
+                            <span class="hint-text">All rights reserved.</span>
+                            <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!-- END COPYRIGHT -->
+            </ng-template>
+        </div>
+    </page-container>
+    <!-- QUICKVIEW -->
+</ng-template>

@@ -1,0 +1,157 @@
+<h1 mat-dialog-title *ngIf="data.options.update && !readonly; else newone">Actualizar agente "{{data.temporal.name}}"
+</h1>
+<ng-template #newone>
+    <h1 mat-dialog-title *ngIf="!readonly; else detail">Nuevo agente</h1>
+</ng-template>
+<ng-template #detail>
+    <h1 mat-dialog-title>Detalles del agente: "{{data.entity.name}}"</h1>
+</ng-template>
+<div mat-dialog-content>
+    <form role="form" #userForm="ngForm">
+        <p class="small-text">Datos personales</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Nombre completo</label>
+                    <input type="text" (input)="searchName($event)" class="form-control" [(ngModel)]="data.entity.name"
+                        name="name" id="name" placeholder="Ingrese el nombre" #name="ngModel" required
+                        [disabled]="readonly">
+                </div>
+                <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+                <div *ngIf="nameExist">
+                    <label class="error">Ya existe un agente con este Nombre.</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Dirección</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.address" name="address"
+                        id="address" placeholder="Ingrese la dirección" #address="ngModel" [disabled]="readonly">
+                </div>
+                <div *ngIf="address.invalid && (address.dirty || address.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Teléfono</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.phone" name="phone" id="phone"
+                        placeholder="Ingrese el teléfono" #phone="ngModel" required [disabled]="readonly"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" [maxlength]="10"
+                        [minlength]="10">
+                </div>
+                <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                    <label class="error">Este campo es requerido y debe cumplir con 10 dígitos.</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Correo electrónico</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.email" name="email" id="email"
+                        placeholder="Ingrese el correo electrónico" #email="ngModel" [disabled]="readonly" required>
+                </div>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default form-group-default-select2 required">
+                    <label class="">Tipo de agente</label>
+                    <pg-select style="width: 100%;" [(ngModel)]="data.entity.type" name="type" id="type"
+                        [PlaceHolder]="'Seleccione el tipo del agente'" ShowSearch
+                        NotFoundContent="Tipo del agente no encontrado" #type="ngModel" required [disabled]="readonly">
+
+                        <pg-option [Label]="'Vendedor'" [Value]="'Vendedor'"></pg-option>
+                        <pg-option [Label]="'Cobratario'" [Value]="'Cobratario'"></pg-option>
+                        <pg-option [Label]="'Capturista'" [Value]="'Capturista'"></pg-option>
+                        <pg-option [Label]="'Vendedor-Cobratario'" [Value]="'Vendedor-Cobratario'"></pg-option>
+                    </pg-select>
+                </div>
+                <div *ngIf="type.invalid && (type.dirty || type.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default form-group-default-select2 required">
+                    <label class="">Status del agente</label>
+                    <pg-select style="width: 100%;" [(ngModel)]="data.entity.status" name="status" id="status"
+                        [PlaceHolder]="'Seleccione el status del agente'" ShowSearch
+                        NotFoundContent="Status del agente no encontrado" #status="ngModel" required
+                        [disabled]="readonly">
+                        <pg-option [Label]="'Activo'" [Value]="'Activo'"></pg-option>
+                        <pg-option [Label]="'Inactivo'" [Value]="'Inactivo'"></pg-option>
+                    </pg-select>
+                </div>
+                <div *ngIf="status.invalid && (status.dirty || status.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default form-group-default-select2 required" pgFormGroupDefault>
+                    <label>Sucursal</label>
+                    <pg-select (SearchChange)="searchBranch($event)" style="width: 100%;"
+                        [(ngModel)]="data.entity.id_branch" name="id_branch" id="id_branch"
+                        [PlaceHolder]="'Seleccione la sucursal'" ShowSearch="true"
+                        NotFoundContent="Sucursal no encontrada" #id_branch="ngModel" required [disabled]="readonly">
+                        <pg-option *ngFor="let branch of branches" [Label]="branch.name" [Value]="branch.id">
+                        </pg-option>
+                    </pg-select>
+                </div>
+                <div *ngIf="id_branch.invalid && (id_branch.dirty || id_branch.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default form-group-default-select2" pgFormGroupDefault>
+                    <label>Usuario</label>
+                    <pg-select style="width: 100%;" [(ngModel)]="data.entity.id_user" name="user-id" id="user-id"
+                        [PlaceHolder]="'Seleccione el Usuario asociado'" [ShowSearch]="true"
+                        NotFoundContent="Usuario no encontrado" #user="ngModel" [disabled]="readonly">
+                        <pg-option [Label]="'No asignar'" [Value]=null></pg-option>
+                        <pg-option *ngFor="let user of users" [Value]="user.id" [Label]="user.name"></pg-option>
+                    </pg-select>
+                    <label style="font-size: 12px;" class="text-warning">Solo se muestran los usuarios que aún no han
+                        sido asignados a un agente.</label>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<mat-dialog-actions align="center">
+    <button aria-label="" type="button" class="btn btn-cons btn-animated from-top" cdkFocusInitial
+        (click)="onCancel(!readonly)">
+        <span>{{ readonly ? 'Volver' : 'Cancelar' }}</span>
+        <span class="hidden-block">
+            <i class="pg-icon">{{ readonly ? 'undo' : 'close' }}</i>
+        </span>
+    </button>
+    <button aria-label="" [hidden]="readonly" [disabled]="userForm.invalid" type="button"
+        class="btn btn-primary btn-cons btn-animated from-top" [mat-dialog-close]="data.entity"
+        [style.background-color]="data.configuration.primary_color"
+        [style.border-color]="data.configuration.primary_color"
+        (mouseover)="data.configuration.primary_color = data.configuration.calculate_hover_primary_color()"
+        (mouseleave)="data.configuration.primary_color = data.configuration.primary_color_back">
+        <span>Aceptar</span>
+        <span class="hidden-block">
+            <i class="pg-icon">save</i>
+        </span>
+    </button>
+</mat-dialog-actions>

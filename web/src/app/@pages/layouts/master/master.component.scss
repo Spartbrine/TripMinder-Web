@@ -1,0 +1,241 @@
+@import 'core.scss';
+$base-img-url: "../../assets/images";
+$assets-url: "../../assets";
+$responsive-img-url: "../assets/images";
+$breakpoint-tablet: 768px;
+.clickeable {
+    cursor: pointer;
+}
+
+.pagination-table {
+    justify-content: space-evenly;
+    margin-top: 0.5rem;
+}
+
+.center-item-table {
+    text-align: center !important;
+}
+
+.ws-label {
+    white-space: nowrap;
+}
+
+.btn-toolbar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+
+@import "modules/_layout.scss";
+@import "modules/_sidebar.scss";
+@import "modules/_secondary-sidebar.scss";
+@import 'modules/_header.scss';
+@import 'modules/_overlay-search.scss';
+@import 'modules/_split-view.scss';
+//Sidebar Styles
+@import 'modules/_quick-view.scss';
+@import 'modules/_list.scss';
+//UI Components
+@import "icons.scss";
+@import "modules/_typography.scss";
+@import 'modules/_breadcrumb.scss';
+@import "modules/_buttons.scss";
+@import "modules/_alerts.scss";
+@import "modules/_notifications.scss";
+@import "modules/_tabs_accordian.scss";
+@import "modules/_modals.scss";
+@import "modules/_progress_indicators.scss";
+//Pages Components
+@import "modules/_datepicker.scss";
+@import "modules/_timepicker.scss";
+@import "modules/_select.scss";
+@import "modules/_selectfx.scss";
+@import "modules/_slider.scss";
+@import "modules/_checkbox.scss";
+@import "modules/_radio.scss";
+@import "modules/_switch.scss";
+@import "modules/_tabs.scss";
+@import "modules/_tags.scss";
+@import "modules/_uploader.scss";
+@import "modules/_pagination.scss";
+//Email App
+@import 'modules/_email.scss';
+//View
+@import "modules/_view.scss";
+//Cards
+@import "modules/_cards.scss";
+//Form Elements
+@import "modules/_form_elements.scss";
+//Tables
+@import "modules/_tables.scss";
+//Charts
+@import "modules/_charts.scss";
+//List
+@import "modules/_list.scss";
+//Social
+@import "modules/_social.scss";
+//Email
+@import "modules/_email.scss";
+//Login
+@import "modules/_login.scss";
+//Lock screen
+@import "modules/_lock_screen.scss";
+//Timeline
+@import "modules/_timeline.scss";
+//Gallery
+@import "modules/_gallery.scss";
+//Chat
+@import "modules/_chat.scss";
+//Z-indexes
+@import "modules/z_index.scss";
+//Misc
+@import "modules/_misc.scss";
+//Print
+@import "modules/_print.scss";
+//Widgets
+@import "modules/_widgets.scss";
+//Demo - Remove in production
+@import "modules/_demo.scss";
+//Responsive Classes
+@import "_responsive.scss";
+//Utils
+@import "utils.scss";
+//Vendor
+@import "vendor/perfect-scroller.scss";
+@import "vendor/typehead.scss";
+@import "vendor/ng-tree.scss";
+@import "vendor/quill.scss";
+@import "vendor/ng-datatable.scss";
+@import "vendor/ngx-nvd3.scss";
+@import "vendor/ngx-google-map.scss";
+@import "../../../../../colors.scss";
+.export-excel {
+    background-color: #0d6b4a;
+    color: #ffffff;
+}
+
+.export-pdf {
+    background-color: #c01f33;
+    color: #ffffff;
+    &:hover {
+        background-color: #a01d2c;
+    }
+}
+
+.buttom-nowrap {
+    margin-inline-start: auto;
+    flex-wrap: nowrap;
+}
+
+.palette-top {
+    height: 0.5em;
+    border-top: 0;
+    border-radius: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.single-line {
+    white-space: nowrap;
+}
+
+.mat-dialog-container {
+    display: block;
+    padding: 24px;
+    box-sizing: border-box;
+    overflow: auto;
+    outline: 0;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    max-height: inherit;
+    border: 1px solid #f2f6f7;
+    border-radius: 3px;
+    box-shadow: none;
+}
+
+div.card-body {
+    padding-bottom: 0px;
+}
+
+div.card.border-dark {
+    margin-bottom: 5px;
+}
+
+.label-checkbox-card {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.0.6em;
+    font-weight: 500;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.move-right {
+    float: right;
+}
+
+.shift-external-school {
+    background-color: $color-progress;
+    color: #ffffff;
+    float: right;
+    border-radius: 4px;
+    font-size: x-small;
+    width: 75px;
+    margin: 0.5px;
+    text-align: center;
+}
+
+.name-external-school {
+    font-size: xx-small;
+    font-weight: 600;
+}
+
+.center-img {
+    margin: auto;
+    display: block;
+}
+
+@media (min-width: $breakpoint-tablet) {
+    .table-layout {
+        table-layout: fixed;
+    }
+}
+
+
+/**
+    Table Skeleton Loader
+*/
+
+@keyframes table-loader {
+    40% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.table-loader {
+    position: relative;
+    .line-loader {
+        background-color: #E7E7E7;
+        height: 14px;
+        border-radius: 7px;
+        width: 80%;
+    }
+    &:after {
+        position: absolute;
+        transform: translateY(-50%);
+        top: 50%;
+        left: 0;
+        content: "";
+        display: block;
+        width: 100%;
+        height: 24px;
+        background-image: linear-gradient( 100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 80%);
+        background-size: 200px 24px;
+        background-position: -100px 0;
+        background-repeat: no-repeat;
+        animation: table-loader 1s infinite;
+    }
+}

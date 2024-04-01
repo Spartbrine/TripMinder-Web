@@ -1,0 +1,208 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false,
+    "defaultCollection": "@angular-eslint/schematics"
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "angular": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "deploy/dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "polyfills": "src/polyfills.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/@pages/styles"
+              ]
+            },
+            "assets": [
+              "src/assets",
+              "src/favicon.ico",
+              "src/firebase-messaging-sw.js",
+              "src/manifest.json"
+            ],
+            "styles": [
+              "src/assets/plugins/bootstrap/css/bootstrap.min.css",
+              "src/assets/plugins/codrops-stepsform/css/component.css",
+              "src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/focus-visible/dist/focus-visible.min.js",
+              "node_modules/scrollreveal/dist/scrollreveal.js",
+              "node_modules/echarts/dist/echarts.min.js",
+              "src/app/@pages/assets/javascript/pages.js",
+              "node_modules/masonry-layout/dist/masonry.pkgd.min.js",
+              "node_modules/isotope-layout/dist/isotope.pkgd.min.js",
+              "node_modules/imagesloaded/imagesloaded.pkgd.js",
+              "src/assets/plugins/modernizr.custom.js",
+              "src/assets/plugins/codrops-stepsform/js/classie.js",
+              "src/assets/plugins/codrops-stepsform/js/stepsForm.js",
+              "src/assets/plugins/skycons/skycons.js",
+              "node_modules/moment/moment.js",
+              "node_modules/marked/marked.min.js",
+              "bootstrap.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "rxjs/Subject",
+              "qrcode",
+              "raf",
+              "core-js",
+              "jspdf",
+              "jspdf-autotable",
+              "rxjs-compat",
+              "xlsx"
+            ],
+            "aot": false,
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": ""
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "angular:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "angular:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "scripts": [
+              "node_modules/scrollreveal/dist/scrollreveal.js",
+              "node_modules/echarts/dist/echarts.min.js",
+              "src/app/@pages/assets/javascript/pages.js",
+              "node_modules/masonry-layout/dist/masonry.pkgd.min.js",
+              "node_modules/isotope-layout/dist/isotope.pkgd.min.js",
+              "node_modules/imagesloaded/imagesloaded.pkgd.js",
+              "src/assets/plugins/modernizr.custom.js",
+              "src/assets/plugins/codrops-stepsform/js/classie.js",
+              "src/assets/plugins/codrops-stepsform/js/stepsForm.js",
+              "src/assets/plugins/skycons/skycons.js",
+              "node_modules/moment/moment.js",
+              "node_modules/marked/marked.min.js",
+              "bootstrap.js"
+            ],
+            "styles": [
+              "src/assets/plugins/bootstrap/css/bootstrap.min.css",
+              "src/assets/plugins/font-awesome/css/font-awesome.min.css",
+              "src/assets/plugins/codrops-stepsform/css/component.css",
+              "src/styles.scss"
+            ],
+            "assets": [
+              "src/assets",
+              "src/favicon.ico",
+              "src/firebase-messaging-sw.js",
+              "src/manifest.json"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "angular-e2e": {
+      "root": "e2e",
+      "sourceRoot": "e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "./protractor.conf.js",
+            "devServerTarget": "angular:serve"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "angular",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "app",
+      "style": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "app"
+    }
+  }
+}

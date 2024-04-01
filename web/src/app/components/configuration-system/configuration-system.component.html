@@ -1,0 +1,242 @@
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg sm-p-l-0 sm-p-r-0">
+        <div class="inner">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Ajustes</a></li>
+                <li class="breadcrumb-item active" [style.color]="configuration.primary_color">Sistema</li>
+            </ol>
+        </div>
+    </div>
+    <app-palette-top></app-palette-top>
+</div>
+
+<div class="container-fluid container-fixed-lg bg-white" *ngIf="configuration">
+
+    <div class="card-body">
+        <form role="form" #userForm="ngForm" class="row">
+
+            <div class="card card-transparent">
+                <div class="card-header">
+                    <div class="card-title">Colores del sistema</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Color del sistema</label>
+                    <ngx-colors ngx-colors-trigger [(ngModel)]="configuration.primary_color" name="primary_color"
+                        id="primary_color" #primary_color="ngModel"></ngx-colors>
+
+                </div>
+                <div *ngIf="primary_color.invalid && (primary_color.dirty || primary_color.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Color de la barra de progreso</label>
+                    <ngx-colors ngx-colors-trigger [(ngModel)]="configuration.progress_color" name="progress_color"
+                        id="progress_color" #progress_color="ngModel"></ngx-colors>
+
+                </div>
+                <div *ngIf="progress_color.invalid && (progress_color.dirty || progress_color.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Color del boton de login</label>
+                    <ngx-colors ngx-colors-trigger [(ngModel)]="configuration.btnlogin_color" name="btnlogin_color"
+                        id="btnlogin_color" #btnlogin_color="ngModel"></ngx-colors>
+
+                </div>
+                <div *ngIf="btnlogin_color.invalid && (btnlogin_color.dirty || btnlogin_color.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+
+
+            <div class="card card-transparent">
+                <div class="card-header">
+                    <div class="card-title">Logotipos del sistema</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="form-group form-group-default " pgFormGroupDefault>
+                    <label>Logo Sidebar</label>
+                    <input style="margin-top: 5px" type="file" accept="image/*"
+                        (change)="onFileSelected($event, 'SidebarLogo')" class="form-control" name="house" id="house"
+                        placeholder="Ingrese la referencia">
+
+                    <div class="row">
+                        <div class="col-10">
+                            <div *ngIf="configuration.image_sidebarlogo">
+                                <img [src]="configuration.image_sidebarlogo" alt="Imagen" class="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="form-group form-group-default " pgFormGroupDefault>
+                    <label>Logo Header</label>
+                    <input style="margin-top: 5px" type="file" accept="image/*"
+                        (change)="onFileSelected($event, 'HeaderLogo')" class="form-control" name="house" id="house"
+                        placeholder="Ingrese la referencia">
+
+                    <div class="row">
+                        <div class="col-10">
+                            <div *ngIf="configuration.image_headerlogo">
+                                <img [src]="configuration.image_headerlogo" alt="Imagen" class="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="form-group form-group-default " pgFormGroupDefault>
+                    <label>Logo Reporte</label>
+                    <input style="margin-top: 5px" type="file" accept="image/*"
+                        (change)="onFileSelected($event, 'ReportLogo')" class="form-control" name="house" id="house"
+                        placeholder="Ingrese la referencia">
+
+                    <div class="row">
+                        <div class="col-10">
+                            <div *ngIf="configuration.image_report">
+                                <img [src]="configuration.image_report" alt="Imagen" class="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12 col-md-6">
+                <div class="form-group form-group-default " pgFormGroupDefault>
+                    <label>Logo Login</label>
+                    <input style="margin-top: 5px" type="file" accept="image/*"
+                        (change)="onFileSelected($event, 'LoginLogo')" class="form-control" name="house" id="house"
+                        placeholder="Ingrese la referencia">
+
+                    <div class="row">
+                        <div class="col-5">
+                            <div *ngIf="configuration.image_login">
+                                <img [src]="configuration.image_login" alt="Imagen" class="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="form-group form-group-default" pgFormGroupDefault>
+                    <label>Banner Login</label>
+                    <input style="margin-top: 5px" type="file" accept="image/*"
+                        (change)="onFileSelected($event, 'LoginBanner')" class="form-control" name="house" id="house"
+                        placeholder="Ingrese la referencia">
+
+                    <div class="row">
+                        <div class="col-9">
+                            <div *ngIf="configuration.image_bannerlogin">
+                                <img [src]="configuration.image_bannerlogin" alt="Imagen" class="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card card-transparent">
+                <div class="card-header">
+                    <div class="card-title">Datos generales</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="form-group form-group-default required " pgFormGroupDefault>
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" [(ngModel)]="configuration.name" name="name" id="name"
+                        placeholder="Ingrese el nombre" #name="ngModel" required>
+                </div>
+                <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-3">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Teléfono</label>
+                    <div class="d-flex">
+                        <input type="text" class="form-control " [(ngModel)]="configuration.phone" name="phone"
+                            id="phone" placeholder="Ingrese el teléfono" #phone="ngModel" [maxlength]="10"
+                            [minlength]="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                    </div>
+                </div>
+                <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                    <label class="error">El número telefónico debe tener 10 caracteres.</label>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="form-group form-group-default required " pgFormGroupDefault>
+                    <label>Dirección</label>
+                    <input type="text" class="form-control" [(ngModel)]="configuration.direction" name="direction"
+                        id="direction" placeholder="Ingrese la dirección" #direction="ngModel" required maxlength="30">
+                </div>
+                <div *ngIf="direction.invalid && (direction.dirty || direction.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-2">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Color de las tablas</label>
+                    <ngx-colors ngx-colors-trigger [(ngModel)]="configuration.color_table" name="color_table"
+                        id="color_table" #color_table="ngModel"></ngx-colors>
+
+                </div>
+                <div *ngIf="color_table.invalid && (color_table.dirty || color_table.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+
+
+
+        </form>
+
+        <div class="row justify-content-between pt-5 pb-4">
+            <div class="col-4">
+                <button aria-label="" type="button" class="btn btn-primary btn-cons btn-animated from-top"
+                    [style.background-color]="btn_color"
+                    [style.border-color]="btn_color"
+                    (mouseover)="btn_color = configuration.calculate_hover_primary_color()"
+                    (mouseleave)="btn_color = btn_color_back" (click)="save()"
+                    [disabled]="userForm.invalid">
+                    <span>Guardar</span>
+                    <span class="hidden-block">
+                        <i class="pg-icon">save</i>
+                    </span>
+                </button>
+            </div>
+
+            <div class="col-4">
+                <div class="float-right">
+                    <button aria-label="" type="button" class="btn btn-outline-primary btn-cons btn-animated from-top"
+                        [style.background-color]="configuration.white_color"
+                        [style.color]="btn_color_outline"
+                        [style.border-color]="btn_color_outline"
+                        (mouseover)="configuration.white_color = configuration.calculate_primary_color_light()"
+                        (mouseleave)="configuration.white_color = configuration.white_color_back"
+                        (click)="cancel()">
+                        <span>Cancelar</span>
+                        <span class="hidden-block">
+                            <i class="pg-icon">cross</i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="table-responsive">
+   <table class="table table-hover">
+      <thead>
+         <tr>
+            <th class="center-item-table" rowspan="2">Clave</th>
+            <th class="center-item-tabl e" rowspan="2">Asignatura</th>
+            <th class="center-item-table" colspan="3">Calificaciones</th>
+            <th class="center-item-table" colspan="2">Final</th>
+            <th class="center-item-table" colspan="3">Faltas</th>
+            <th class="center-item-table" rowspan="2">Total Faltas</th>
+         </tr>
+         <tr>
+            <th class="center-item-table">P1</th>
+            <th class="center-item-table">P2</th>
+            <th class="center-item-table">P3</th>
+            <th class="center-item-table">C</th>
+            <th class="center-item-table">EXT</th>
+            <th class="center-item-table">P1</th>
+            <th class="center-item-table">P2</th>
+            <th class="center-item-table">P3</th>
+         </tr>
+      </thead>
+      <tbody>
+         <ng-container *ngIf="_data;else tableSkeletonLoader">
+            <tr *ngFor="let grade of _data">
+               <td class="center-item-table">{{ grade.key }}</td>
+               <td scope="col">{{ grade.program }}</td>
+               <td class="center-item-table">{{ grade.CP1 }}</td>
+               <td class="center-item-table">{{ grade.CP2 }}</td>
+               <td class="center-item-table">{{ grade.CP3 }}</td>
+               <td class="center-item-table">{{ grade.C }}</td>
+               <td class="center-item-table">{{ grade.EXT }}</td>
+               <td class="center-item-table">{{ grade.FP1 }}</td>
+               <td class="center-item-table">{{ grade.FP2 }}</td>
+               <td class="center-item-table">{{ grade.FP3 }}</td>
+               <td class="center-item-table">{{ grade.TF }}</td>
+            </tr>
+         </ng-container>
+         <ng-template #tableSkeletonLoader>
+            <tr *ngFor="let tableSln of tableSkeleton">
+               <td class="table-loader" *ngFor="let tdSln of tdSkeleton">
+                  <div class="line-loader"></div>
+               </td>
+            </tr>
+         </ng-template>
+      </tbody>
+   </table>
+</div>

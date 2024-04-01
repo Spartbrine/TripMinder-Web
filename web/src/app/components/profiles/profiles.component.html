@@ -1,0 +1,70 @@
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg sm-p-l-0 sm-p-r-0">
+        <div class="inner">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Ajustes</a></li>
+                <li class="breadcrumb-item active" [style.color]="configuration.primary_color">Perfiles de usuario</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-fixed-lg bg-white" *ngIf="configuration">
+    <div class="card card-transparent">
+        <div class="card-header">
+            <div class="card-title">Listado de Perfiles de usuario</div>
+            <!--
+            <div class="pull-right">
+                <div class="col-xs-12">
+                    <button class="btn btn-primary btn-cons" [style.background-color]="configuration.primary_color"
+                        [style.border-color]="configuration.primary_color"
+                        (mouseover)="configuration.primary_color = configuration.calculate_hover_primary_color()"
+                        (mouseleave)="configuration.primary_color = configuration.primary_color_back" (click)="openDialog()">
+                      <i class="pg-icon">add</i> Nuevo Perfil
+                    </button>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre del perfil</th>
+                        <th>No de control</th>
+                        <th>Permisos</th>
+                        <th>Fecha de última actualización</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let profile of entities">
+                        <td id="name">{{ profile.name }}</td>
+                        <td>{{ profile.control }}</td>
+                        <td>{{ profile.permissions }}</td>
+                        <td>{{ profile.updatedOn }}</td>
+                        <td>
+                            <div class="flex" style="justify-content: space-evenly;">
+                                <a (click)="openDialog(true, profile.id, true)" class="clickeable">
+                                    <i class="pg-icon">list_bullets</i>
+                                </a>
+                                <a (click)="openDialog(true, profile.id)" class="clickeable">
+                                    <i class="pg-icon">edit</i>
+                                </a>
+                                <!--<a (click)="delete(profile.id)" class="clickeable" *ngIf="profile.id != user.id && (user.perfil==1 || user.perfil==3)">
+                                    <i class="pg-icon">trash_alt</i>
+                                </a>-->
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="flex mb-4" style="justify-content: space-evenly;">
+                <button [disabled]="!hasPrevious()" (click)="previousPage()" class="btn btn-default">Anterior</button>
+                <button [disabled]="!hasNext()" (click)="nextPage()" class="btn btn-default">Siguiente</button>
+            </div>
+        </div>
+    </div>
+</div>

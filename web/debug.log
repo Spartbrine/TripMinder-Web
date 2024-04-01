@@ -1,0 +1,25 @@
+[0508/165145.857:ERROR:process_reader_win.cc(151)] SuspendThread: Acceso denegado. (0x5)
+[0508/165145.910:ERROR:process_reader_win.cc(151)] SuspendThread: Acceso denegado. (0x5)
+[0508/165145.910:ERROR:process_reader_win.cc(151)] SuspendThread: Acceso denegado. (0x5)
+[0508/165145.910:ERROR:process_reader_win.cc(151)] SuspendThread: Acceso denegado. (0x5)
+[0508/165145.910:ERROR:process_reader_win.cc(151)] SuspendThread: Acceso denegado. (0x5)
+[0508/165145.910:ERROR:process_reader_win.cc(151)] SuspendThread: Acceso denegado. (0x5)
+[0508/165145.910:ERROR:process_reader_win.cc(151)] SuspendThread: Acceso denegado. (0x5)
+[0508/165145.910:ERROR:process_reader_win.cc(151)] SuspendThread: Acceso denegado. (0x5)
+[0508/165145.910:ERROR:process_reader_win.cc(151)] SuspendThread: Acceso denegado. (0x5)
+[0508/165146.124:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0508/165145.911:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0508/165146.125:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0508/165146.274:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0508/165146.485:ERROR:exception_snapshot_win.cc(98)] thread ID 11720 not found in process
+[0508/165146.485:ERROR:exception_snapshot_win.cc(98)] thread ID 9064 not found in process
+[0508/165146.485:ERROR:exception_snapshot_win.cc(98)] thread ID 12560 not found in process
+[0508/165146.485:ERROR:exception_snapshot_win.cc(98)] thread ID 4476 not found in process
+[0508/165146.485:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Se intent� obtener acceso a un proceso que est� cerr�ndose. (0xc000010a)
+[0508/165146.485:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Se intent� obtener acceso a un proceso que est� cerr�ndose. (0xc000010a)
+[0508/165146.485:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Se intent� obtener acceso a un proceso que est� cerr�ndose. (0xc000010a)
+[0508/165146.485:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Se intent� obtener acceso a un proceso que est� cerr�ndose. (0xc000010a)
+[1014/130024.031:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
+[1019/092518.490:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
+[1026/114646.929:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
+[1104/122754.159:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)

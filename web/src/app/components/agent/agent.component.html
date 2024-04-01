@@ -1,0 +1,116 @@
+
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg sm-p-l-0 sm-p-r-0">
+        <div class="inner">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Catálogos</a></li>
+                <li class="breadcrumb-item active" [style.color]="configuration.primary_color">Agentes</li>
+            </ol>
+        </div>
+    </div>
+    <app-palette-top></app-palette-top>
+</div>
+
+<div class="container-fluid container-fixed-lg bg-white" *ngIf="configuration">
+    <div class="card card-transparent">
+        <div class="card-header">
+            <div class="card-title">Listado de agentes
+                <i class="pg-icon clickeable" (click)="toggleFilter()">filter</i>
+            </div>
+            <div class="pull-right">
+                <div class="col-xs-12">
+                    <button class="btn btn-primary btn-cons" [style.background-color]="configuration.primary_color"
+                        [style.border-color]="configuration.primary_color"
+                        (mouseover)="configuration.primary_color = configuration.calculate_hover_primary_color()"
+                        (mouseleave)="configuration.primary_color = configuration.primary_color_back" (click)="openDialog()">
+                      <i class="pg-icon">add</i> Nuevo Agente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="form-group input-group" *ngIf="filter">
+            <div class="input-group-append" *ngIf="selectedOption">
+                <button type="button" class="btn btn-default btn-icon btn-lg" (click)="cleanFilter()">
+                    <i class="pg-icon">close</i>
+                </button>
+            </div>
+            <div class="input-group-append">
+                <pg-select-fx style="width: 140px" [(ngModel)]="selectedOption" (ngModelChange)="changeSelected()" [PlaceHolder]="'Seleccione'" AllowClear>
+                    <pg-selectfx-option *ngFor="let option of filterOptions" [Label]="option.label" [Value]="option.property">
+                    </pg-selectfx-option>
+                </pg-select-fx>
+            </div>
+            <input type="text" placeholder="Buscar..." class="form-control" [(ngModel)]="params[selectedOption]"  [style.border-color]="configuration.border_color_form"
+                (focus)="configuration.border_color_form = configuration.primary_color"
+                (blur)="configuration.border_color_form = configuration.border_color_form_back" *ngIf="!['perfil'].includes(selectedOption)&&selectedOption==='name'">
+            <pg-select style="width: 100%;" [(ngModel)]="params[selectedOption]" name="status" id="status" [PlaceHolder]="'Seleccione el status'" [ShowSearch]="true" NotFoundContent="Status no encontrado"  *ngIf="selectedOption == 'status'">
+                <pg-option [Value]="'Activo'" [Label]="'Activo'"></pg-option>
+                <pg-option [Value]="'Inactivo'" [Label]="'Inactivo'"></pg-option>
+            </pg-select>
+            <pg-select style="width: 100%;" [(ngModel)]="params[selectedOption]" name="type" id="type" [PlaceHolder]="'Seleccione el tipo'" [ShowSearch]="true" NotFoundContent="Tipo no encontrado"  *ngIf="selectedOption == 'type'">
+                <pg-option [Value]="'Vendedor-Cobratario'" [Label]="'Vendedor-Cobratario'"></pg-option>
+                <pg-option [Value]="'Vendedor'" [Label]="'Vendedor'"></pg-option>
+                <pg-option [Value]="'Cobratario'" [Label]="'Cobratario'"></pg-option>
+            </pg-select>
+            <div class="input-group-append">
+                <button type="button" class="btn btn-primary btn-icon btn-lg" [style.background-color]="configuration.search_primary_color"
+                        [style.border-color]="configuration.search_primary_color"
+                        (mouseover)="configuration.search_primary_color = configuration.search_calculate_hover_primary_color()"
+                        (mouseleave)="configuration.search_primary_color = configuration.search_primary_color_back" (click)="reload()" [disabled]="!selectedOption">
+                    <i class="pg-icon">search</i>
+                </button>
+            </div>
+            <app-filter-tags [params]="params" [filterOptions]="filterOptions" [selectedOption]="selectedOption" (removedParam)="reload()">
+            </app-filter-tags>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="center-item-table">Nombre</th>
+                        <th class="center-item-table">Teléfono</th>
+                        <th class="center-item-table">Dirección</th>
+                        <th class="center-item-table">Correo</th>
+                        <th class="center-item-table">Tipo</th>
+                        <th class="center-item-table">Sucursal</th>
+                        <th class="center-item-table">Usuario</th>
+                        <th class="center-item-table">Estatus</th>
+                        <th class="center-item-table">Opciones</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of entities">
+                        <td id="name" scope="col">{{row.name}}</td>
+                        <td class="center-item-table">{{row.phone}}</td>
+                        <td class="center-item-table">{{row.address}}</td>
+                        <td class="center-item-table">{{row.email}}</td>
+                        <td class="center-item-table">{{row.type}}</td>
+                        <td class="center-item-table">{{row.branch?.name}}</td>
+                        <td class="center-item-table">{{row.user?.name}}</td>
+                        <td class="center-item-table">{{row.status}}</td>
+                        <td class="center-item-table">
+                            <div class="flex" style="justify-content: space-evenly;">
+                                <a (click)="openDialog(true, row.id, true)" class="clickeable">
+                                    <i class="pg-icon">list_bullets</i>
+                                </a>
+                                <a (click)="openDialog(true, row.id)" class="clickeable">
+                                    <i class="pg-icon">edit</i>
+                                </a>
+                                <a (click)="delete(row.id)" class="clickeable" >
+                                    <i class="pg-icon">trash_alt</i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="flex mb-4 pagination-table">
+                <button [disabled]="!hasPrevious()" (click)="previousPage()" class="btn btn-default">Anterior</button>
+                <button [disabled]="!hasNext()" (click)="nextPage()" class="btn btn-default">Siguiente</button>
+            </div>
+        </div>
+    </div>
+</div>

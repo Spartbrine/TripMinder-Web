@@ -1,0 +1,77 @@
+<div id="quickview" class="quickview-wrapper" [class.open]=isOpen>
+<tabset>
+	<tab heading="Alerts" id="quickview-alerts" customClass="full-height">
+	  <div class="view-port clearfix" id="alerts">
+	    <div class="view bg-white">
+				<div class="full-height d-flex flex-column">
+					<div class="navbar navbar-default navbar-sm">
+						<div class="navbar-inner">
+							
+							<div class="view-heading">
+								Notificaciones
+							</div>
+						</div>
+					</div>
+					<div perfectScrollbar class="full-height list-view boreded no-top-border">
+						<div class="list-view-group-container">
+							<div class="list-view-group-header text-uppercase">
+								General
+							</div>
+							<ul>
+								<li class="alert-list">
+									<a href="javascript:void(0)" class="p-t-10 p-b-10 align-items-center" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax">
+										<p class="">
+											<span class="text-primary fs-10"><i class="pg-icon">circle_fill</i></span>
+										</p>
+										<p class="col overflow-ellipsis fs-12 p-l-10">
+											<span class="text-color link">12:13 AM<br></span>
+											<span class="text-color">Actualización de Alumnos</span>
+										</p>
+									</a>
+								</li>
+								<li class="alert-list">
+									<a href="javascript:void(0)" class="p-t-10 p-b-10 align-items-center" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax">
+										<p class="">
+											<span class="text-primary fs-10"><i class="pg-icon">circle_fill</i></span>
+										</p>
+										<p class="col overflow-ellipsis fs-12 p-l-10">
+											<span class="text-color link">14:13 PM<br></span>
+											<span class="text-color">Actualización de Calificaciones</span>
+										</p>
+									</a>
+								</li>
+								<li class="alert-list" *ngFor="let note of noteDeleteList">
+									<a href="javascript:void(0)" class="p-t-10 p-b-10 align-items-center" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax">
+										<p class="">
+											<span class="text-primary fs-10"><i class="pg-icon">circle_fill</i></span>
+										</p>
+										<p class="col overflow-ellipsis fs-12 p-l-10">
+											<span class="text-color link">{{ note.date | date:'short' }}<br></span>
+											<span class="text-color">{{note.notes}}</span>
+										</p>
+									</a>
+								</li>
+                <li *ngFor="let note_t of noteList">
+                    <a href="javascript:void(0)" class="p-t-10 p-b-10 align-items-center" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax">
+                        <p class="">
+                            <span class="text-primary fs-10"><i class="pg-icon">circle_fill</i></span>
+                        </p>
+                        <p class="col overflow-ellipsis fs-12 p-l-10">
+                            <span class="text-color link">{{ note_t.message.title }}<br></span>
+                            <span class="text-color">{{ note_t.message.body }}</span>
+                        </p>
+                    </a>
+                </li>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+	    </div>
+	  </div>
+	</tab>
+</tabset>
+<a class="btn-icon-link invert quickview-toggle" (click)="toggle()"><i class="pg-icon">close</i></a>
+</div>
+
+    

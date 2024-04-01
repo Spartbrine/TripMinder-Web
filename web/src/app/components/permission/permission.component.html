@@ -1,0 +1,120 @@
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg sm-p-l-0 sm-p-r-0">
+        <div class="inner">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Seguridad</a></li>
+                <li class="breadcrumb-item active" [style.color]="configuration.primary_color">Permisos</li>
+            </ol>
+        </div>
+    </div>
+    <app-palette-top></app-palette-top>
+</div>
+
+<div class="container-fluid container-fixed-lg bg-white" *ngIf="configuration">
+
+    <div class="card-body">
+        <div class="input-group-append">
+            <div class="form-group form-group-default form-group-default-select2" pgFormGroupDefault>
+                <label>Usuario</label>
+                <pg-select style="width: 100%;" [(ngModel)]="current_user" [PlaceHolder]="'Seleccione un usuario'"
+                    [ShowSearch]="true" NotFoundContent="Usuario encontrado" (SearchChange)="searchUser($event)"
+                    (ngModelChange)="loadPermissions()" name="user">
+                    <pg-option *ngFor="let user of users" [Label]="user.name" [Value]="user.id"></pg-option>
+                </pg-select>
+            </div>
+            <div class="form-group form-group-default form-group-default-select2" pgFormGroupDefault>
+                <label>Perfil</label>
+                <pg-select style="width: 100%;" [(ngModel)]="current_profile" [PlaceHolder]="'Seleccione un perfil'"
+                    [ShowSearch]="true" NotFoundContent="Perfil encontrado" (ngModelChange)="loadProfileElements()"
+                    name="profile" (dblclick)="enableProfile()" disabled="{{disabled}}">
+                    <pg-option *ngFor="let profile of profiles" [Label]="profile.name" [Value]="profile.id"></pg-option>
+                </pg-select>
+            </div>
+        </div>
+        <!-- <div class="card-title">PERMISOS DE PERFIL
+            <i class="pg-icon clickeable" (click)="switchProfilePermissions()"
+                *ngIf="!viewProfilePermissons">arrow_drop_down</i>
+            <i class="pg-icon clickeable" (click)="switchProfilePermissions()"
+                *ngIf="viewProfilePermissons">arrow_drop_up</i>
+        </div> -->
+        <div class="row" *ngIf="viewProfilePermissons">
+            <div *ngFor="let grouperElement of grouperElements" class="col-md-3 pt-2">
+                <div *ngIf="grouperElement.icon == 'class' || grouperElement.icon == 'phonelink_setup' else pgIcon">
+                    <h6> <mat-icon>{{grouperElement.icon}} </mat-icon> {{grouperElement.name}}</h6>
+                </div>
+                <ng-template #pgIcon>
+                    <h6> <i class="pg-icon">{{grouperElement.icon}} </i> {{grouperElement.name}}</h6>
+                </ng-template>
+                <div class="pl-4" *ngFor="let element of grouperElement.elements">
+                    <input class="styled-checkbox"
+                        id="{{element.id}}" type="checkbox" value="value1" [(ngModel)]="element.assigned">
+                    <label for="{{element.id}}" style="font-size: 1.2em;">{{element.name}}</label>
+                </div>
+
+            </div>
+        </div>
+        <!-- <br>
+        <br>
+        <div class="card-title">OTROS PERMISOS
+            <i class="pg-icon clickeable" (click)="switchOtherPermissions()"
+                *ngIf="!viewOtherPermissons">arrow_drop_down</i>
+            <i class="pg-icon clickeable" (click)="switchOtherPermissions()"
+                *ngIf="viewOtherPermissons">arrow_drop_up</i>
+        </div>
+        <div class="row" *ngIf="viewOtherPermissons">
+            <div *ngFor="let grouperElement of otherGrouperElements" class="col-md-4 pt-2">
+                <div *ngIf="grouperElement.icon == 'class' else pgIcon">
+                    <h6> <mat-icon>{{grouperElement.icon}} </mat-icon> {{grouperElement.name}}</h6>
+                </div>
+                <ng-template #pgIcon>
+                    <h6> <i class="pg-icon">{{grouperElement.icon}} </i> {{grouperElement.name}}</h6>
+                </ng-template>
+                <div class="pl-4" *ngFor="let element of grouperElement.elements">
+                    <input class="styled-checkbox" id="{{element.id}}" type="checkbox" value="value1"
+                        [(ngModel)]="element.assigned">
+                    <label for="{{element.id}}" style="font-size: 1.2em;">{{element.name}}</label>
+                </div>
+
+            </div>
+        </div> -->
+
+        <div>
+            <div class="row justify-content-between pt-5 pb-4">
+                <div class="col-4">
+                    <button aria-label="" type="button" class="btn btn-primary btn-cons btn-animated from-top"
+                        [style.background-color]="configuration.primary_color"
+                        [style.border-color]="configuration.primary_color"
+                        (mouseover)="configuration.primary_color = configuration.calculate_hover_primary_color()"
+                        (mouseleave)="configuration.primary_color = configuration.primary_color_back"
+                        (click)="showAlert()">
+                        <span>Guardar</span>
+                        <span class="hidden-block">
+                            <i class="pg-icon">save</i>
+                        </span>
+                    </button>
+                </div>
+
+                <div class="col-4">
+                    <div class="float-right">
+                        <button aria-label="" type="button"
+                            class="btn btn-outline-primary btn-cons btn-animated from-top"
+                            [style.background-color]="configuration.white_color"
+                            [style.color]="configuration.primary_color"
+                            [style.border-color]="configuration.primary_color"
+                            (mouseover)="configuration.white_color = configuration.calculate_primary_color_light()"
+                            (mouseleave)="configuration.white_color = configuration.white_color_back"
+                            (click)="loadPermissions()">
+                            <span>Cancelar</span>
+                            <span class="hidden-block">
+                                <i class="pg-icon">cross</i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

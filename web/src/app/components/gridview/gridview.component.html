@@ -1,0 +1,55 @@
+<div class="gridview">
+    <table style="width: 100%; text-align: center;">
+        <colgroup>
+            <col width="15%">
+            <col width="14.16%">
+            <col width="14.16%">
+            <col width="14.16%">
+            <col width="14.16%">
+            <col width="14.16%">
+            <col width="14.16%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>{{info}}</th>
+                <th *ngFor="let day of days" class="border" (drop)="dropOnDay($event, day)" ondragover="event.preventDefault()">
+                    {{getDay(day)}}
+                    <app-tooltip-form [dropped]="drops[day]" [hoursDisabled]="dayHours[day]" [hidden]="!drops[day].show" [day]="day">
+                    </app-tooltip-form>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of rows">
+                <ng-container *ngFor="let col of row.cols">
+                    <ng-container *ngIf="col.type == 'hour'; else td">
+                        <th class="border" [ngStyle]="{'background-color': col.content.color }" *ngIf="col.content.text" rowspan="6" scope="row">
+                            {{col.content.text}}
+                        </th>
+                    </ng-container>
+                    <ng-template #td>
+                        <td [ngStyle]="{
+              'background-color': col.content.color, 
+              'border-bottom': col.content.border ? '1px solid #dee2e6' : '', 
+              'border-left': '1px solid #dee2e6',
+              'border-right': '1px solid #dee2e6',
+              'cursor': 'pointer' 
+            }" [ngClass]="{ 'white-hover': col.content.color == 'white' }">
+                            <span class="tooltip-text">
+                <ng-container *ngIf="col.content.title; else time">
+                  
+                  {{col.content.title}} 
+                    <br>
+                  {{col.content.text}}
+                </ng-container>
+                <ng-template #time>
+                  
+                </ng-template>
+              </span>
+                        </td>
+                    </ng-template>
+                </ng-container>
+            </tr>
+        </tbody>
+    </table>
+</div>

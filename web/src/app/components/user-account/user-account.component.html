@@ -1,0 +1,148 @@
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg sm-p-l-0 sm-p-r-0">
+        <div class="inner">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a>/</a></li>
+                <li class="breadcrumb-item active" [style.color]="configuration.primary_color">Cuenta</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-fixed-lg" style="margin-bottom: 20px;">
+    <div class="bg-white">
+        <div class="row row-same-height">
+            <div class="col-md-3 b-r b-dashed b-grey sm-b-b">
+                <div class="padding-30 sm-padding-5 sm-m-t-15 m-t-50">
+                    <fa-icon icon="user-cog" size="lg" [classes]="['hint-text']"></fa-icon>
+                    <h2>Información de usuario</h2>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="padding-30 sm-padding-5">
+                    <div class="row">
+                        <div class="col-md-12 sm-no-padding sm-p-b-20 d-flex justify-content-between">
+                            <div>
+                                <div class="font-montserrat bold all-caps">Nombre:</div>
+                                <div class="font-montserrat bold all-caps">Perfil:</div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="text-right">
+                                <div class="">{{ user.name }}</div>
+                                <div class="">{{ getProfileName(user.profile) }}</div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-fixed-lg" style="margin-bottom: 20px;">
+    <div class="bg-white">
+        <div class="row row-same-height">
+            <div class="col-md-3 b-r b-dashed b-grey sm-b-b">
+                <div class="padding-30 sm-padding-5 sm-m-t-15 m-t-50">
+                    <fa-icon icon="key" size="lg" [classes]="['hint-text']"></fa-icon>
+                    <h2>Actualizar contraseña</h2>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="padding-30 sm-padding-5">
+                    <form role="form" #profileForm="ngForm">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-default input-group required">
+                                    <div class="form-input-group">
+                                        <label class="">Contraseña actual</label>
+                                        <input type="password" class="form-control" [(ngModel)]="currentPassword"
+                                            name="currentPassword" #currentPass="ngModel"
+                                            placeholder="Ingrese la contraseña actual" (change)="checkCurrentPass()"
+                                            required>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <fa-icon icon="lock" size="sm"></fa-icon>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div *ngIf="currentPass.invalid && (currentPass.dirty || currentPass.touched)">
+                                    <label class="error">Este campo es requerido.</label>
+                                </div>
+                                <div *ngIf="!flagCurrentPass && currentPassword">
+                                    <label class="error">La contraseña no coincide con la actual</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-default input-group required">
+                                    <div class="form-input-group">
+                                        <label class="">Crear nueva contraseña</label>
+                                        <input type="password" class="form-control" name="newPassword"
+                                            [(ngModel)]="newPassword" #newPass="ngModel" (change)="checkConfirmPass()"
+                                            placeholder="Ingrese la nueva contraseña" required>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <fa-icon icon="lock" size="sm"></fa-icon>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div *ngIf="newPass.invalid && (newPass.dirty || newPass.touched)">
+                                    <label class="error">Este campo es requerido.</label>
+                                </div>
+                                <div *ngIf="!flagConfirmPass && newPassword && confirmPassword">
+                                    <label class="error">La contraseña no coincide con la confirmada</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-default input-group required">
+                                    <div class="form-input-group">
+                                        <label class="">Confirmar contraseña nueva</label>
+                                        <input type="password" class="form-control" name="confirmPassword"
+                                            [(ngModel)]="confirmPassword" #confirmPass="ngModel"
+                                            (change)="checkConfirmPass()"
+                                            placeholder="Ingrese para confirmar contraseña" required>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <fa-icon icon="lock" size="sm"></fa-icon>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div *ngIf="confirmPass.invalid && (confirmPass.dirty || confirmPass.touched)">
+                                    <label class="error">Este campo es requerido.</label>
+                                </div>
+                                <div *ngIf="!flagConfirmPass && newPassword && confirmPassword">
+                                    <label class="error">La contraseña no coincide con la nueva contraseña</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button aria-label=""
+                                    [disabled]="isSamePassword || profileForm.invalid || !flagCurrentPass || !flagConfirmPass"
+                                    type="button" class="btn btn-primary btn-cons btn-animated from-top"
+                                    [style.background-color]="configuration.primary_color"
+                                    [style.border-color]="configuration.primary_color"
+                                    (mouseover)="configuration.primary_color = configuration.calculate_hover_primary_color()"
+                                    (mouseleave)="configuration.primary_color = configuration.primary_color_back"
+                                    (click)="changePassword()">
+                                    <span>Actualizar</span>
+                                    <span class="hidden-block">
+                                        <i class="material-icons">update</i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

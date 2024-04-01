@@ -1,0 +1,41 @@
+<h1 mat-dialog-title *ngIf="data.options.update && !readonly; else newone">Actualizar perfil "{{data.temporal.name}}"</h1>
+<ng-template #newone>
+    <h1 mat-dialog-title *ngIf="!readonly; else detail">Nuevo perfil</h1>
+</ng-template>
+<ng-template #detail>
+    <h1 mat-dialog-title>Detalles del perfil: "{{data.entity.name}}"</h1>
+</ng-template>
+<div mat-dialog-content>
+    <form role="form" #perfilForm="ngForm">
+        <p class="small-text">Datos de perfil</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Nombre del perfil</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.name" name="name" id="name"
+                     placeholder="Ingrese el nombre del perfil" #perfilName="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="perfilName.invalid && (perfilName.dirty || perfilName.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<mat-dialog-actions align="center">
+    <button aria-label="" type="button" class="btn btn-cons btn-animated from-top" cdkFocusInitial (click)="onCancel(!readonly)">
+        <span>{{ readonly ? 'Volver' : 'Cancelar' }}</span>
+        <span class="hidden-block">
+            <i class="pg-icon">{{ readonly ? 'undo' : 'close' }}</i>
+        </span>
+    </button>
+    <button aria-label="" [hidden]="readonly" [disabled]="perfilForm.invalid" type="button" class="btn btn-primary btn-cons btn-animated from-top" [mat-dialog-close]="data.entity"         [style.background-color]="data.configuration.primary_color"
+                        [style.border-color]="data.configuration.primary_color"
+                        (mouseover)="data.configuration.primary_color = data.configuration.calculate_hover_primary_color()"
+                        (mouseleave)="data.configuration.primary_color = data.configuration.primary_color_back">
+        <span>Aceptar</span>
+        <span class="hidden-block">
+            <i class="pg-icon">save</i>
+        </span>
+    </button>
+</mat-dialog-actions>

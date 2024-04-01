@@ -1,0 +1,31 @@
+<div class="row" [ngClass]="{'clickeable': isClickeable}">
+   <div class="col-12">
+      <div class="card card-step" [ngClass]="{'completed': status.isCompleted}">
+         <div class="card-indicator" [ngClass]="{'completed': status.isCompleted}">
+            <ng-container *ngIf="status.isCompleted; else isNotCompleted">
+               <i class="material-icons">done</i>
+            </ng-container>
+            <ng-template #isNotCompleted>
+               {{ status.statusNumber }}
+            </ng-template>
+         </div>
+         <div class="card-body">
+            <div class="row">
+               <div class="col-8">
+                  <h6 class="card-text-body" [ngClass]="{'completed': status.isCompleted}">
+                     {{ status.title }}
+                  </h6>
+                  <span class="card-span" [ngClass]="{'completed': status.isCompleted}">
+                     {{ status.textBody }}
+                  </span>
+               </div>
+               <div class="col-4">
+                  <span class="card-status" [ngClass]="{'completed': status.isCompleted}">
+                     {{ status.isCompleted ? 'Completado' :  'Incompleto' }}
+                  </span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

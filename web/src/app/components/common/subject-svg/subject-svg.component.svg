@@ -1,0 +1,11 @@
+<svg x="0px" y="0px" viewBox="0 0 469.5 379" class="size-subject" xml:space="preserve">
+   <path fill="#fc9088" d="M234.8,24.7v-6.3c0-10.2-8.5-18.4-18.9-18.4h-197C8.5,0,0,8.2,0,18.4v331.9h469.5V43.1
+	 c0-10.2-8.5-18.4-18.9-18.4H234.8z"/>
+   <rect x="20.8" y="51.2" fill="#FFFFFF" width="432.2" height="302.5"/>
+   <path d="M228.1,89l-7,18.8H18.9C8.5,107.8,0,116.1,0,126.2v234.3C0,370.7,8.5,379,18.9,379h431.7
+	 c10.4,0,18.9-8.2,18.9-18.4V95.3c0-10.2-8.5-18.4-18.9-18.4H245.8C237.9,76.8,230.8,81.7,228.1,89z" fill="#FA7268"/>
+   <text transform="matrix(1 0 0 1 236.9001 115.8892)" fill="#FFF" class="f-family-weight f-subject-label">Asignatura</text>
+   <text transform="matrix(1 0 0 1 15.348 164.0348)" fill="#4D4D4D" class="f-family-weight f-subject-value">{{ _studyProgram }}</text>
+   <text transform="matrix(1 0 0 1 15.3482 309.8308)" fill="#FFF" class="f-family-weight f-teacher-label">Docente</text>
+   <text transform="matrix(1 0 0 1 15.3484 341.7955)" fill="#4D4D4D" class="f-family-weight f-teacher-value">{{ _teacher }}</text>
+</svg>

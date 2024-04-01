@@ -1,0 +1,17 @@
+.tag {
+  border: 1px solid white;
+  border-radius: 20px;
+  background-color: black;
+  color: white;
+  padding: 0.2em;
+  cursor: pointer;
+}
+
+.tags-panel {
+  margin-top: 0.25rem;
+  * {
+    &:not(:last-child) {
+      margin-right: 0.25rem;
+    }
+  }
+}

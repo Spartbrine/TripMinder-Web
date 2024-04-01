@@ -1,0 +1,118 @@
+/*
+   Variables sizes display
+*/
+@import '../../../../../colors.scss';
+
+$mobile-l: 425px;
+$tablet: 768px;
+$laptop: 1024px;
+$laptop-l: 1440px;
+
+.card-indicator {
+   position: relative;
+   top: 36px;
+   right: 16px;
+   background: white;
+   border: 2px solid #f0f0f0;
+   width: 30px;
+   height: 30px;
+   border-radius: 50%;
+   text-align: center;
+   font-weight: bold;
+   font-size: 1rem;
+   padding: 0.2rem;
+
+   & > i {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 4px;
+   }
+
+   &.completed {
+      background: #00cac0;
+      color: white;
+      border: none;
+   }
+}
+
+.card {
+   &.card-step {
+      border: 2px solid #f0f0f0;
+      box-shadow: none;
+      border-radius: 17px;
+
+      &.completed {
+         background: #00cac036;
+         border: 2px solid #00cac0;
+         backdrop-filter: blur(4px);
+         -webkit-backdrop-filter: blur(4px);
+      }
+
+      .card-body {
+         padding: 5px;
+      }
+   }
+}
+
+.card-status {
+   top: -21px;
+   position: relative;
+   left: -24px;
+   font-weight: bold;
+   color: $color-progress;
+   font-size: 1rem;
+   white-space: nowrap;
+
+   &.completed {
+      color: #00cac0;
+   }
+}
+
+.card-text-body {
+   position: relative;
+   top: -20px;
+   left: 10px;
+   font-size: 1rem;
+   color: #20222b;
+   font-weight: bold;
+
+   &.completed {
+      color: #00cac0;
+   }
+}
+
+.card-span {
+   position: relative;
+   font-size: 0.93rem;
+   color: #4b4b4b;
+   top: -21px;
+   left: 10px;
+
+   &.completed {
+      color: #20222b;
+   }
+}
+
+@media (min-width: $mobile-l) {
+   .card-status {
+      left: 0px;
+   }
+}
+
+@media (min-width: $tablet) {
+   .card-status {
+      left: 85px;
+   }
+}
+
+@media (min-width: $laptop) {
+   .card-status {
+      left: 149px;
+   }
+}
+
+@media (min-width: $laptop-l) {
+   .card-status {
+      left: 270px;
+   }
+}

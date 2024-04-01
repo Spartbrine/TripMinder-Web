@@ -1,0 +1,10 @@
+/.angular/cache
+
+node_modules/*
+e2e/*
+deploy/dist/*
+dist/*
+node_modules/*
+e2e/*
+dist/*
+.vscode/

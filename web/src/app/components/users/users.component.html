@@ -1,0 +1,110 @@
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg sm-p-l-0 sm-p-r-0">
+        <div class="inner">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Ajustes</a></li>
+                <li class="breadcrumb-item active" [style.color]="configuration.primary_color">Usuarios</li>
+            </ol>
+        </div>
+    </div>
+    <app-palette-top></app-palette-top>
+</div>
+
+<div class="container-fluid container-fixed-lg bg-white" *ngIf="configuration">
+    <div class="card card-transparent">
+        <div class="card-header">
+            <div class="card-title">Listado de Usuarios
+                <i class="pg-icon clickeable" (click)="toggleFilter()">filter</i>
+            </div>
+            <div class="pull-right">
+                <div class="col-xs-12">
+                    <button class="btn btn-primary btn-cons" [style.background-color]="configuration.primary_color"
+                        [style.border-color]="configuration.primary_color"
+                        (mouseover)="configuration.primary_color = configuration.calculate_hover_primary_color()"
+                        (mouseleave)="configuration.primary_color = configuration.primary_color_back" (click)="openDialog()">
+                        <i class="pg-icon">add</i> Nuevo Usuario
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="form-group input-group" *ngIf="filter">
+            <div class="input-group-append" *ngIf="selectedOption">
+                <button type="button" class="btn btn-default btn-icon btn-lg" (click)="cleanFilter()">
+                    <i class="pg-icon">close</i>
+                </button>
+            </div>
+            <div class="input-group-append">
+                <pg-select-fx style="width: 140px" [(ngModel)]="selectedOption" [PlaceHolder]="'Seleccione'" (ngModelChange)="changeSelected()" 
+                AllowClear>
+                    <pg-selectfx-option *ngFor="let option of filterOptions" [Label]="option.label"
+                        [Value]="option.property">
+                    </pg-selectfx-option>
+                </pg-select-fx>
+            </div>
+            <input type="text" placeholder="Buscar..." class="form-control" [(ngModel)]="params[selectedOption]"  [style.border-color]="configuration.border_color_form"
+                (focus)="configuration.border_color_form = configuration.primary_color"
+                (blur)="configuration.border_color_form = configuration.border_color_form_back"
+                *ngIf="!['profile'].includes(selectedOption)">
+            <pg-select *ngIf="['profile'].includes(selectedOption)" [(ngModel)]="params[selectedOption]" name="search_"
+                [PlaceHolder]="'Seleccione un perfil'" [ShowSearch]="true" NotFoundContent="No encontrado">
+                <pg-option *ngFor="let profile of profiles" [Label]="profile.name" [Value]="profile.id"></pg-option>
+            </pg-select>
+            <div class="input-group-append">
+                <button type="button" class="btn btn-primary btn-icon btn-lg" [style.background-color]="configuration.search_primary_color"
+                        [style.border-color]="configuration.search_primary_color"
+                        (mouseover)="configuration.search_primary_color = configuration.search_calculate_hover_primary_color()"
+                        (mouseleave)="configuration.search_primary_color = configuration.search_primary_color_back" (click)="reload()"
+                    [disabled]="!selectedOption">
+                    <i class="pg-icon">search</i>
+                </button>
+            </div>
+            <app-filter-tags [params]="params" [filterOptions]="filterOptions" [selectedOption]="selectedOption"
+                (removedParam)="reload()">
+            </app-filter-tags>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="center-item-table">Nombre</th>
+                        <th class="center-item-table">Usuario</th>
+
+                        <th class="center-item-table">Fecha Creación</th>
+                        <th class="center-item-table">Perfil</th>
+                        <!--th class="center-item-table">Turno</th-->
+                        <th class="center-item-table">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of entities">
+                        <td id="name" scope="col">{{row.name}}</td>
+                        <td class="center-item-table">{{row.email}}</td>
+
+                        <td class="center-item-table">{{row.created_at}}</td>
+                        <td class="center-item-table">{{getProfileName(row.profile)}}</td>
+                        <td class="center-item-table">
+                            <div class="flex" style="justify-content: space-evenly;">
+                                <a (click)="openDialog(true, row.id, true)" class="clickeable">
+                                    <i class="pg-icon">list_bullets</i>
+                                </a>
+                                <a (click)="openDialog(true, row.id)" class="clickeable" class="clickeable">
+                                    <i class="pg-icon">edit</i>
+                                </a>
+                                <a (click)="delete(row.id)" class="clickeable"
+                                    *ngIf="row.id != user.id && (user.profile==1 || user.profile==3)">
+                                    <i class="pg-icon">trash_alt</i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="flex mb-4 pagination-table">
+                <button [disabled]="!hasPrevious()" (click)="previousPage()" class="btn btn-default">Anterior</button>
+                <button [disabled]="!hasNext()" (click)="nextPage()" class="btn btn-default">Siguiente</button>
+            </div>
+        </div>
+    </div>
+</div>

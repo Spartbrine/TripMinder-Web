@@ -1,0 +1,38 @@
+<span [hidden]="hidden" class="tooltip-form">
+  <h5 *ngIf="dropped && dropped.program" style="margin: 0; display: inline-flex; justify-content: space-around; width: 100%; align-items: baseline;">
+    <span>
+      <canvas [id]="dropped.program.id" width="30px" height="15px" style="border: 1px solid white;" [ngStyle]="{ 'background': colorRef[dropped.program.id] }"></canvas>
+    </span>
+    <span>{{dropped.program.key}}</span>
+  </h5>
+  <form>
+    <div class="form-row pb-2">
+      <div class="col">
+        <label for="start">Inicio</label>
+        <select class="form-control" [id]="day+'-start'" [name]="day+'-start'" (ngModelChange)="validateEnd($event)" [ngModel]="start">
+          <option *ngFor="let hour of startHours" [value]="hour" [disabled]="hoursDisabled[hour]">{{hour}}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label for="end">Final</label>
+        <select class="form-control" [id]="day+'-end'" [name]="day+'-end'" [ngModel]="end" disabled>
+          <option *ngFor="let hour of hours" [value]="hour">{{hour}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-6 col-form-label" style="color: white" for="modules">Módulos</label>
+      <div class="col-6" style="padding-left: 5px;">
+        <input class="form-control" name="modules" type="number" min="1" max="12" (ngModelChange)="endByModules($event)" [ngModel]="modules">
+      </div>
+    </div>
+    <div style="display: flex; justify-content: space-evenly;">
+      <button class="btn btn-danger" (click)="onCancel()">
+        <span class="material-icons">cancel</span>
+      </button>
+      <button class="btn btn-success" (click)="onAccept()" [disabled]="!(start && hoursDisabled) || (hoursDisabled[start] || !modules)">
+        <span class="material-icons">check_circle</span>
+      </button>
+    </div>
+  </form>
+</span>

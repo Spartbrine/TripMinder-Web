@@ -1,0 +1,32 @@
+<pgcard TimeOut="3000" [ProgressType]="'bar'" [Maximize]="false" [Toggle]="true" [Close]="false" [BodyClass]="'no-padding'">
+    <ng-template #CardTitle>
+        <span class="font-montserrat">
+			  {{ _titleText }}
+      </span>
+        <div class="p-l-20 p-r-20 p-b-10 p-t-5">
+            <div class="pull-left">
+                <h3 class="text-primary no-margin">Total:</h3>
+            </div>
+            <h4 class="pull-right semi-bold no-margin">
+                <sup> </sup> {{ _titleValue }}
+            </h4>
+            <div class="clearfix"></div>
+        </div>
+    </ng-template>
+
+    <div class="widget-11-table auto-overflow">
+        <table class="table table-condensed table-hover">
+            <tbody>
+                <tr *ngFor="let data of Data">
+                    <td class="fs-12 w-50">{{data.title}}</td>
+                    <td class="text-right b-r b-dashed b-grey w-25">
+                        <span class="hint-text small">{{data.name}}</span>
+                    </td>
+                    <td class="w-25">
+                        <span class="font-montserrat fs-18">{{data.value}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</pgcard>

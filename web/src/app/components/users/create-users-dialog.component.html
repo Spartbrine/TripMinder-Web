@@ -1,0 +1,76 @@
+<h1 mat-dialog-title *ngIf="data.options.update && !readonly; else newone">Actualizar usuario "{{data.temporal.name}}"</h1>
+<ng-template #newone>
+    <h1 mat-dialog-title *ngIf="!readonly; else detail">Nuevo usuario</h1>
+</ng-template>
+<ng-template #detail>
+    <h1 mat-dialog-title>Detalles del usuario: "{{data.entity.name}}"</h1>
+</ng-template>
+<div mat-dialog-content>
+    <form role="form" #userForm="ngForm">
+        <p class="small-text">Datos personales</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.name" name="name" id="name" placeholder="Ingrese el nombre" #nameU="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="nameU.invalid && (nameU.dirty || nameU.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default form-group-default-select2 required">
+                    <label class="">Perfil</label>
+                    <pg-select style="width: 100%;" [(ngModel)]="data.entity.profile" name="rol" id="rol" [PlaceHolder]="'Seleccione el perfil'" ShowSearch NotFoundContent="Perfil no encontrado" (ngModelChange)="isAdmin($event)" #perfilUser="ngModel" required [disabled]="readonly">
+                        <pg-option *ngFor="let profile of profiles" [Label]="profile.name" [Value]="profile.id"></pg-option>
+                    </pg-select>
+                </div>
+                <div *ngIf="perfilUser.invalid && (perfilUser.dirty || perfilUser.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+        </div>
+        <p class="small-text">Datos de acceso</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Correo/Usuario</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.email" name="email" id="email" placeholder="Ingrese el nombre de usuario o correo" #emailU="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="emailU.invalid && (emailU.dirty || emailU.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="!readonly">
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Contraseña</label>
+                    <input type="password" class="form-control" [(ngModel)]="data.entity.password" name="password" id="password" placeholder="Ingrese la contraseña" #userPassword="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="userPassword.invalid && (userPassword.dirty || userPassword.touched) && !data.options.update">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<mat-dialog-actions align="center">
+    <button aria-label="" type="button" class="btn btn-cons btn-animated from-top" cdkFocusInitial (click)="onCancel(!readonly)">
+        <span>{{ readonly ? 'Volver' : 'Cancelar' }}</span>
+        <span class="hidden-block">
+            <i class="pg-icon">{{ readonly ? 'undo' : 'close' }}</i>
+        </span>
+    </button>
+    <button aria-label="" [hidden]="readonly" [disabled]="userForm.invalid" type="button" class="btn btn-primary btn-cons btn-animated from-top" [mat-dialog-close]="data.entity"         [style.background-color]="data.configuration.primary_color"
+                        [style.border-color]="data.configuration.primary_color"
+                        (mouseover)="data.configuration.primary_color = data.configuration.calculate_hover_primary_color()"
+                        (mouseleave)="data.configuration.primary_color = data.configuration.primary_color_back">
+        <span>Aceptar</span>
+        <span class="hidden-block">
+            <i class="pg-icon">save</i>
+        </span>
+    </button>
+</mat-dialog-actions>

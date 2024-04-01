@@ -1,0 +1,19 @@
+<div class="radio-tile-group">
+   <div class="input-container" *ngFor="let radioButton of _radioButtons">
+      <input
+       [id]="radioButton.value"
+       class="radio-button"
+       type="radio"
+       [name]="_name"
+       [value]="radioButton.value"
+       (change)="change($event.target.value)"
+      />
+      <div [class]="'radio-tile rt-'+radioButton.classColor">
+         <div class="icon">
+            <img class="img-login" [src]="'assets/img/'+radioButton.iconSVG+'.svg'" *ngIf="radioButton.iconSVG">
+            <fa-icon icon="{{radioButton.iconName}}" size="lg" *ngIf="radioButton.iconName"></fa-icon>
+         </div>
+         <label [for]="radioButton.value" [class]="'radio-tile-label rtl-'+radioButton.classColor">{{radioButton.label}}</label>
+      </div>
+   </div>
+</div>

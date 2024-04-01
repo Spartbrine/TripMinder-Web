@@ -1,0 +1,57 @@
+<div class="login-wrapper " style="background-image: url({{configuration.image_bannerlogin}})">
+    <div class="bg-pic" >
+        <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20"></div>
+    </div>
+    <div class="login-container bg-white">
+        <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-25 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
+            <img class="img-login" src="{{configuration.image_login}}" alt="logo" pgRetina src1x="{{configuration.image_login}}" src2x="{{configuration.image_login}}">
+            <h6 class="p-t-25 p-b-15 text-center">
+                Inicia sesión con tu cuenta
+            </h6>
+            <div class="palette-top" [style.background-color]="configuration.btnlogin_color" [ngClass]="!error ? 'margin-palette' : ''"></div>
+            <p class="text-center alert alert-danger" *ngIf="error">El usuario y la contraseña no concuerdan,<br> intente de nuevo</p>
+
+            <form class="p-t-15" role="form" class="form-signin" #loginForm="ngForm" (ngSubmit)="loginUser()">
+                <div class="form-group form-group-default input-group" [class.has-error]="email_user.invalid && (email_user.dirty || email_user.touched)">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="material-icons">face</i>
+                        </span>
+                    </div>
+                    <div class="form-input-group">
+                        <label>Usuario</label>
+                        <input type="text" id="email" name="email" [(ngModel)]="email" #email_user="ngModel" required placeholder="Introduzca su usuario" class="form-control">
+                    </div>
+                </div>
+                <div *ngIf="email_user.invalid && (email_user.dirty || email_user.touched)">
+                    <label *ngIf="email_user.errors.required" class="error">Este campo es requerido.</label>
+                </div>
+                <div class="form-group form-group-default input-group" [class.has-error]="password_user.invalid && (password_user.dirty || password_user.touched)">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="material-icons passwd">vpn_key</i>
+                        </span>
+                    </div>
+                    <div class="form-input-group">
+                        <label>Contraseña</label>
+                        <input type="{{type}}" class="form-control" placeholder="Introduzca su contraseña" id="password" name="password" [(ngModel)]="password" #password_user="ngModel" required>
+                    </div>
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <button id="show_password" class="btn" type="button" (click)="showPassword($event)" style="border: none;"> 
+                                <span class="input-group-post-text eye-icon">
+                                    <i class="material-icons">{{visibility}}</i>
+                                </span>
+                        </button>
+                        </span>
+                    </div>
+                </div>
+                <div *ngIf="password_user.invalid && (password_user.dirty || password_user.touched)">
+                    <label *ngIf="password_user.errors.required" class="error">Este campo es requerido.</label>
+                </div>
+                <button [style.background-color]="configuration.btnlogin_color" [style.border-color]="configuration.btnlogin_color" class="btn btn-lg btn-primary btn-block btn-login" type="submit" [disabled]="!loginForm.valid||loading"><fa-icon *ngIf="loading" [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>Entrar</button>
+            </form>
+            <div style="color: rgb(209, 209, 209); margin-top: 20px;">Versión 1.0.0</div>
+        </div>
+    </div>
+</div>
