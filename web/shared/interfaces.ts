@@ -273,17 +273,9 @@ export interface DialogData<T, U = any> {
   configuration: Configuration
   extras?: U;
   type_payment?: string;
-  assignamentCollection?: AssignamentCollection
 }
 
-export interface DialogDataMassiveCollectors {
-  municipality: string;
-  agent: string;
-  state: string;
-  locality: string;
-  agent_locality: string;
-  clients: Client[]
-}
+
 
 export interface WhereIn<T> {
   field: keyof T;
@@ -408,14 +400,7 @@ export interface StringBase64 {
   file: string;
 }
 
-export interface Account extends Model {
-  id_client?: number;
-  ammount: number;
-  type: string;
-  status: string;
-  client?: Client;
-  total_ammount?: number;
-}
+
 
 export interface ConfigurationCollection extends Model {
   first_percentage: number;
@@ -449,15 +434,6 @@ export interface SendEmail {
 
 
 
-export interface WeekData {
-  monday: AssignamentCollection,
-  tuesday: AssignamentCollection,
-  wednesday: AssignamentCollection,
-  thursday: AssignamentCollection,
-  friday: AssignamentCollection,
-  saturday: AssignamentCollection,
-  sunday: AssignamentCollection,
-}
 export interface GrouperElements extends Model {
   name: string,
   icon: string,

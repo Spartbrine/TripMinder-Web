@@ -34,6 +34,15 @@ use App\Http\Controllers\DeliveryController;
 */
 Route::middleware(Authenticate::class)->resource('users', UserController::class);
 Route::middleware(Authenticate::class)->resource('profiles', ProfileController::class);
+Route::middleware(Authenticate::class)->get('users/search/{text}', 'App\Http\Controllers\UserController@search');
+
+
+Route::middleware(Authenticate::class)->get('security/elements', 'App\Http\Controllers\SecurityController@getElements');
+Route::middleware(Authenticate::class)->get('security/userelements', 'App\Http\Controllers\SecurityController@getUserElements');
+Route::middleware(Authenticate::class)->post('security/userelements', 'App\Http\Controllers\SecurityController@createUserElements');
+Route::middleware(Authenticate::class)->delete('security/userelements', 'App\Http\Controllers\SecurityController@destroyUserElements');
+Route::middleware(Authenticate::class)->get('security/profilelements', 'App\Http\Controllers\SecurityController@getProfileElements');
+
 Route::middleware(Authenticate::class)->resource('transporttypes', TransportTypeController::class);
 Route::middleware(Authenticate::class)->resource('facilities', FacilityController::class);
 Route::middleware(Authenticate::class)->resource('clients', ClientController::class);
@@ -48,7 +57,8 @@ Route::middleware(Authenticate::class)->resource('incidents', IncidentController
 Route::middleware(Authenticate::class)->resource('locations', LocationController::class);
 Route::middleware(Authenticate::class)->resource('points', PointController::class);
 Route::middleware(Authenticate::class)->resource('deliveries', DeliveryController::class);
-
+Route::middleware(Authenticate::class)->put('configuration/', 'App\Http\Controllers\ConfigurationSystemController@update');
+Route::get('configuration', 'App\Http\Controllers\ConfigurationSystemController@get');
 
 
 

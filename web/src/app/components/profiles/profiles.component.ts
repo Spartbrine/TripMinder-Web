@@ -22,7 +22,7 @@ export class ProfilesComponent extends Catalog<Profile, CreateProfileDialogCompo
     public dialog: MatDialog,
     public configurationService: ConfigurationService
   ) {
-    super(service, auth, dialog, null, null, configurationService);
+    super(service, auth, dialog, configurationService);
     this.params = {
       limit: 25,
       orderBy: {

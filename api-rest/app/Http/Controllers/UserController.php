@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProfileElement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Models\User;
-
+use App\Models\UserElement;
 
 class UserController extends CatalogController
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function clase()
     {
         return User::class;
@@ -42,6 +40,16 @@ class UserController extends CatalogController
         return $this->sendResponse($users, 'OK');
     }
 
+    public function getAreNotAgents()
+    {
+        $users = DB::table('users')
+            ->leftJoin('agents', 'users.id', '=', 'agents.id_user')
+            ->whereNull('agents.id_user')
+            ->select('users.*')
+            ->get();
+
+        return $this->sendResponse($users, 'OK');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -63,6 +71,14 @@ class UserController extends CatalogController
         } else {
             $input['password'] = bcrypt($input['password']);
             $obj = $this->clase()::create($input);
+
+            $profileElements = ProfileElement::where('id_profile', $input['profile'])->get();
+            foreach ($profileElements as $profileElement) {
+                $userElement = new UserElement();
+                $userElement->id_user = $obj->id;
+                $userElement->id_element = $profileElement->id_element;
+                $userElement->save();
+            }
             return $this->sendResponse([$obj], 'success');
         }
     }
@@ -99,9 +115,27 @@ class UserController extends CatalogController
 
         if (isset($input['profile'])) {
 
+
+            if ($user->profile != $input['profile']) {
+
+                UserElement::where('id_user', $user->id)->delete();
+
+
+                $profileElements = ProfileElement::where('id_profile', $input['profile'])->get();
+
+                foreach ($profileElements as $profileElement) {
+                    $userElement = new UserElement();
+                    $userElement->id_user = $user->id;
+                    $userElement->id_element = $profileElement->id_element;
+                    $userElement->save();
+                }
+            }
+
             $user->profile = $input['profile'];
         }
         $user->save();
+
+
         return response()->json($user, 200);
     }
 
@@ -109,6 +143,9 @@ class UserController extends CatalogController
     {
         //
         $user = User::find($id);
+        // Esto hay que implementarlo
+        // $input = $request->getContent();
+        // $input = json_decode($input);
         $input = $request->all();
 
         if (isset($input['profile'])) {
@@ -123,6 +160,7 @@ class UserController extends CatalogController
         //
         $object = $this->clase()::find($id);
         if ($object !== null) {
+            UserElement::where('id_user', $id)->delete();
             $object->delete();
 
             return response()->json($object, 200);

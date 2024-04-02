@@ -8,7 +8,7 @@ use App\Models\ConfigurationSystem;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-use App\Models\Agent;
+//use App\Models\Agent;
 
 class AuthController extends Controller
 {
@@ -113,7 +113,7 @@ class AuthController extends Controller
 
         $user = [
             "id" => $dataUser->id,
-            //"collectorId" => $collector ? $collector->id : 0,
+           // "collectorId" => $collector ? $collector->id : 0,
             "name" => $dataUser->name,
             "email" => $dataUser->email,
             "email_verified_at" => $dataUser->email_verified_at,
@@ -127,7 +127,7 @@ class AuthController extends Controller
             'accessToken' => $token,
             'tokenType' => 'bearer',
             'user' => $user,
-            //'configuration' => ConfigurationSystem::first(),
+            'configuration' => ConfigurationSystem::first(),
             'expiresIn' => auth()->factory()->getTTL() * 60
         ]);
     }

@@ -29,7 +29,7 @@ export class UsersComponent extends Catalog<User, CreateUsersDialogComponent> im
     public dialog: MatDialog,
     public configurationService: ConfigurationService
   ) {
-    super(service, auth, dialog, null, null, configurationService);
+    super(service, auth, dialog, configurationService);
 
     this.params = {
       limit: 20

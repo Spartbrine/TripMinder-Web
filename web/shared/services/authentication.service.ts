@@ -8,8 +8,7 @@ import { ApiService } from './api.service';
 import { Router } from '@angular/router';
 import { randomIntId } from 'shared/utils/generator';
 import { Md5 } from 'ts-md5';
-import { AgentService } from 'src/app/services/agent.service';
-import { BranchService } from 'src/app/services/branch.service';
+
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService extends ApiService<User> {
   // private readonly apiUrl: string = 'https://localhost';
@@ -19,7 +18,7 @@ export class AuthenticationService extends ApiService<User> {
   public root(): string {
     return 'auth';
   }
-  constructor(public http: HttpClient, private router: Router, private agentService: AgentService, private branchService: BranchService) {
+  constructor(public http: HttpClient, private router: Router) {
     super(http);
     this.currentUserSubject = new BehaviorSubject<string>(
       localStorage.getItem('userToken')
@@ -66,8 +65,6 @@ export class AuthenticationService extends ApiService<User> {
     localStorage.removeItem('user');
     localStorage.removeItem('sign');
     localStorage.removeItem('grouperElements');
-    this.agentService.deleteEntityOnStorage()
-    this.branchService.deleteEntityOnStorage()
     this.currentUserSubject.next(null);
 
   }

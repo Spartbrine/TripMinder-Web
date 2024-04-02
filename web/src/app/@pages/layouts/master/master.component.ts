@@ -9,8 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 import { pagesToggleService } from '../../services/toggler.service';
 import { Router } from '@angular/router';
 import { ConfigurationService } from 'src/app/services/configuration.service';
-import { BranchService } from 'src/app/services/branch.service';
-import { AgentService } from 'src/app/services/agent.service';
+
 // icon pages
 // http://pages.revox.io/dashboard/cheatsheet/
 // https://material.io/resources/icons/?style=baseline
@@ -242,8 +241,6 @@ export class MasterComponent extends RootLayout implements OnInit, AfterViewInit
     public configurationService: ConfigurationService,
     private $toggler: pagesToggleService,
     private $router: Router,
-    private agentService: AgentService,
-    private branchService: BranchService
   ) {
     super($toggler, $router);
     this.configuration = configurationService.configurationObject
@@ -308,8 +305,6 @@ export class MasterComponent extends RootLayout implements OnInit, AfterViewInit
     localStorage.removeItem('user');
     localStorage.removeItem('sign');
     localStorage.removeItem('grouperElements');
-    this.agentService.deleteEntityOnStorage()
-    this.branchService.deleteEntityOnStorage()
     location.reload();
   }
 

@@ -121,7 +121,6 @@ import { TreeModule } from 'angular-tree-component';
 import { TemplateReportCardModule } from './components/common/template-report-card/template-report-card.module';
 import { MainModule } from './components/common';
 import { NgxColorsModule } from 'ngx-colors';
-import { SupplierComponent } from './components/supplier/supplier.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
