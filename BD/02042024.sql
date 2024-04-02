@@ -130,7 +130,7 @@ CREATE TABLE `elements` (
 INSERT INTO `elements` (`id`, `id_grouper`, `name`, `url`, `icon`, `index`, `created_at`, `updated_at`) VALUES
 (1, 3, 'Sistema', '/configurationsystem', 'alert_info', 1, '2024-04-02 03:44:30', '2024-04-02 03:44:30'),
 (2, 3, 'Usuarios', '/users', 'U', 2, '2024-04-02 03:45:25', '2024-04-02 03:45:25'),
-(3, 3, 'Permisos', '/Permisos', 'P', 3, '2024-04-02 03:46:16', '2024-04-02 03:46:16');
+(3, 3, 'Permisos', '/permissions', 'P', 3, '2024-04-02 03:46:16', '2024-04-02 03:46:16');
 
 -- --------------------------------------------------------
 
