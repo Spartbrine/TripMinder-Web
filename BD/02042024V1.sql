@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-04-2024 a las 10:12:15
+-- Tiempo de generación: 02-04-2024 a las 23:37:22
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -130,7 +130,8 @@ CREATE TABLE `elements` (
 INSERT INTO `elements` (`id`, `id_grouper`, `name`, `url`, `icon`, `index`, `created_at`, `updated_at`) VALUES
 (1, 3, 'Sistema', '/configurationsystem', 'alert_info', 1, '2024-04-02 03:44:30', '2024-04-02 03:44:30'),
 (2, 3, 'Usuarios', '/users', 'U', 2, '2024-04-02 03:45:25', '2024-04-02 03:45:25'),
-(3, 3, 'Permisos', '/permissions', 'P', 3, '2024-04-02 03:46:16', '2024-04-02 03:46:16');
+(3, 3, 'Permisos', '/permissions', 'P', 3, '2024-04-02 03:46:16', '2024-04-02 03:46:16'),
+(5, 1, 'Tipo de Transporte', '/transporttypes', 'T', 1, '2024-04-02 20:46:24', '2024-04-02 20:46:24');
 
 -- --------------------------------------------------------
 
@@ -421,7 +422,8 @@ CREATE TABLE `user_elements` (
 INSERT INTO `user_elements` (`id`, `id_user`, `id_element`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, '2024-04-02 03:50:20', '2024-04-02 03:50:20'),
 (2, 1, 2, '2024-04-02 03:58:27', '2024-04-02 03:58:27'),
-(3, 1, 3, '2024-04-02 03:58:44', '2024-04-02 03:58:44');
+(3, 1, 3, '2024-04-02 03:58:44', '2024-04-02 03:58:44'),
+(4, 1, 5, '2024-04-02 20:48:05', '2024-04-02 20:48:05');
 
 -- --------------------------------------------------------
 
@@ -635,7 +637,7 @@ ALTER TABLE `deliveries`
 -- AUTO_INCREMENT de la tabla `elements`
 --
 ALTER TABLE `elements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `facilities`
@@ -707,7 +709,7 @@ ALTER TABLE `responsibles`
 -- AUTO_INCREMENT de la tabla `transport_types`
 --
 ALTER TABLE `transport_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `trips`
@@ -725,7 +727,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `user_elements`
 --
 ALTER TABLE `user_elements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `vehicles`
