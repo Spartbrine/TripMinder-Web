@@ -32,12 +32,6 @@ const routes: Routes = [
         //  data: {type_profile: [Profile.ADMIN]},
         loadChildren: () => import('../users/users.module').then(m => m.UsersModule)
       },
-      //    {
-      //      path: 'localities',
-      // //    //  canActivate: [ProfileGuard],
-      // //    //  data: {type_profile: [Profile.ADMIN]},
-      //      loadChildren: () => import('../locality/locality.module').then(m => m.LocalityModule)
-      // },
       {
         path: 'permissions',
         loadChildren: () => import('../permission/permission.module').then(m => m.PermissionModule)
@@ -45,6 +39,10 @@ const routes: Routes = [
       {
         path: 'configurationsystem',
         loadChildren: () => import('../configuration-system/configuration-system.module').then(m => m.ConfigurationSystemModule)
+      },
+      {
+        path: 'transporttypes',
+        loadChildren: () => import('../transport-type/transport-type.module').then(m => m.TransportTypeModule)
       },
       // { path: 'helpdesk', component:  },
       { path: 'not-found', component: NotFoundComponent }

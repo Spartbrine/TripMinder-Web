@@ -507,3 +507,9 @@ export interface Configuration {
   color_border_form: string,
   color_border_form_back: string,
 }
+
+export interface TransportType extends Model {
+  type: string,
+}
+
+
