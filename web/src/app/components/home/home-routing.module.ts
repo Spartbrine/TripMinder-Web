@@ -44,6 +44,30 @@ const routes: Routes = [
         path: 'transporttypes',
         loadChildren: () => import('../transport-type/transport-type.module').then(m => m.TransportTypeModule)
       },
+      {
+        path: 'vehicles',
+        loadChildren: () => import('../vehicle/vehicle.module').then(m => m.VehicleModule)
+      },
+      {
+        path: 'incidenttypes',
+        loadChildren: () => import('../incident-type/incident-type.module').then(m => m.IncidentTypeModule)
+      },
+      {
+        path: 'fueltypes',
+        loadChildren: () => import('../fuel-type/fuel-type.module').then(m => m.FuelTypeModule)
+      },
+      {
+        path: 'clients',
+        loadChildren: () => import('../client/client.module').then(m => m.ClientModule)
+      },
+      {
+        path: 'responsibles',
+        loadChildren: () => import('../responsible/responsible.module').then(m => m.ResponsibleModule)
+      },
+      {
+        path: 'facilities',
+        loadChildren: () => import('../facility/facility.module').then(m => m.FacilityModule)
+      },
       // { path: 'helpdesk', component:  },
       { path: 'not-found', component: NotFoundComponent }
     ]

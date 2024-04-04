@@ -28,7 +28,7 @@ class ResponsibleController extends CatalogController
     }
     public function search(Request $request, $text)
     {
-        $Unit = Responsible::where('type', 'LIKE', '%' . $text . '%')->paginate(1000000);
+        $Unit = Responsible::where('name', 'LIKE', '%' . $text . '%')->paginate(1000000);
 
         return $this->sendResponse($Unit, 'OK');
     }
@@ -52,10 +52,17 @@ class ResponsibleController extends CatalogController
         $input = json_decode($input, true);
         if (json_last_error() !== 0)
             return $this->sendError('JSON Invalid', ['Malformed JSON'], 406);
-        if (isset($input['type']) && $input['type'] !== '')
-            if (Responsible::where('id', '!=', $id)->where('type', $input['type'])->first() != null) return $this->sendError('Validation error', 'Already exists the unit with this name', 409);
-            $object->type = $input['type'];
-
+        if (isset($input['name']) && $input['name'] !== '')
+            if (Responsible::where('id', '!=', $id)->where('name', $input['name'])->first() != null) return $this->sendError('Validation error', 'Already exists the unit with this name', 409);
+            $object->name = $input['name'];
+        if (isset($input['license_number']) && $input['license_number'] !== '')
+            $object->license_number = $input['license_number'];
+        if (isset($input['phone']) && $input['phone'] !== '')
+            $object->phone = $input['phone'];
+        if (isset($input['address']) && $input['address'] !== '')
+            $object->address = $input['address'];
+        if (isset($input['photo']) && $input['photo'] !== '')
+            $object->photo = $input['photo'];
         $answer = $object->save();
         if ($answer) {
             return response()->json($object, 200);

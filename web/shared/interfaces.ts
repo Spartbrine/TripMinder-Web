@@ -511,5 +511,49 @@ export interface Configuration {
 export interface TransportType extends Model {
   type: string,
 }
+export interface Vehicle extends Model {
+  id_transport_type:number,
+  economic_number: string,
+  num_license: string,
+  plates: string,
+  brand: string,
+  model: string,
+  year: number,
+  color: string,
+  insurance_carrier: string,
+  insurance_policy: string,
+  km_x_liter: number,
+  capacity:number,
+  transport_type?: TransportType,
+}
+export interface IncidentType extends Model {
+  name: string,
+}
+export interface FuelType extends Model {
+  type: string,
+}
+export interface Client extends Model {
+  name: string,
+  phone: string,
+  email: string,
+  website: string,
+  rfc: string,
+}
+export interface Responsible extends Model {
+  name: string,
+  license_number: string,
+  phone: string,
+  address: string,
+  photo: string,
+}
+export interface Facility extends Model {
+  name: string,
+  phone: string,
+  longitude: string,
+  latitude: string,
+  locality: string,
+  postal_code: string,
+  address: string,
 
+}
 
