@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-04-2024 a las 23:37:22
+-- Tiempo de generación: 04-04-2024 a las 02:56:40
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -37,6 +37,14 @@ CREATE TABLE `clients` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `clients`
+--
+
+INSERT INTO `clients` (`id`, `name`, `phone`, `email`, `website`, `rfc`, `created_at`, `updated_at`) VALUES
+(1, 'Chapur', '999999999', 'chapur@correo.com', 'www.chapur.com', 'CHSERS908', '2024-04-04 03:33:02', '2024-04-04 03:34:46'),
+(3, 'tt', '77', 'mreduardo19@gmail.com', 'www.chapur.com', 'CHSERS908', '2024-04-04 03:34:58', '2024-04-04 03:34:58');
 
 -- --------------------------------------------------------
 
@@ -131,7 +139,12 @@ INSERT INTO `elements` (`id`, `id_grouper`, `name`, `url`, `icon`, `index`, `cre
 (1, 3, 'Sistema', '/configurationsystem', 'alert_info', 1, '2024-04-02 03:44:30', '2024-04-02 03:44:30'),
 (2, 3, 'Usuarios', '/users', 'U', 2, '2024-04-02 03:45:25', '2024-04-02 03:45:25'),
 (3, 3, 'Permisos', '/permissions', 'P', 3, '2024-04-02 03:46:16', '2024-04-02 03:46:16'),
-(5, 1, 'Tipo de Transporte', '/transporttypes', 'T', 1, '2024-04-02 20:46:24', '2024-04-02 20:46:24');
+(5, 1, 'Tipo de Transporte', '/transporttypes', 'T', 1, '2024-04-02 20:46:24', '2024-04-02 20:46:24'),
+(6, 1, 'Tipos Incidentes', '/incidenttypes', 'T', 2, '2024-04-03 17:58:31', '2024-04-03 17:58:31'),
+(7, 1, 'Tipo Combustible', '/fueltypes', 'C', 3, '2024-04-03 19:18:04', '2024-04-03 19:18:04'),
+(8, 1, 'Clientes', '/clients', 'CL', 4, '2024-04-03 19:57:20', '2024-04-03 19:57:20'),
+(9, 1, 'Responsable', '/responsibles', 'R', 5, '2024-04-03 22:41:49', '2024-04-03 22:41:49'),
+(10, 1, 'Instalaciones', '/facilities', 'I', 6, '2024-04-03 23:36:26', '2024-04-03 23:36:26');
 
 -- --------------------------------------------------------
 
@@ -151,6 +164,13 @@ CREATE TABLE `facilities` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `facilities`
+--
+
+INSERT INTO `facilities` (`id`, `name`, `phone`, `longitude`, `latitude`, `locality`, `postal_code`, `address`, `created_at`, `updated_at`) VALUES
+(1, 'Central', '9999999999', '124', '123', 'Mérida', '97000', ' Fraccionamiento', '2024-04-04 05:42:45', '2024-04-04 05:43:31');
 
 -- --------------------------------------------------------
 
@@ -184,6 +204,14 @@ CREATE TABLE `fuel_types` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `fuel_types`
+--
+
+INSERT INTO `fuel_types` (`id`, `type`, `created_at`, `updated_at`) VALUES
+(1, 'Gasolina', '2024-04-04 01:20:49', '2024-04-04 01:21:23'),
+(2, 'Diesel', '2024-04-04 01:21:08', '2024-04-04 01:21:08');
 
 -- --------------------------------------------------------
 
@@ -238,6 +266,13 @@ CREATE TABLE `incident_types` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `incident_types`
+--
+
+INSERT INTO `incident_types` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Accidente 2', '2024-04-04 00:28:54', '2024-04-04 00:38:26');
 
 -- --------------------------------------------------------
 
@@ -332,6 +367,13 @@ CREATE TABLE `responsibles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `responsibles`
+--
+
+INSERT INTO `responsibles` (`id`, `name`, `license_number`, `phone`, `address`, `photo`, `created_at`, `updated_at`) VALUES
+(1, 'Carlos Canul Más', 'LIC567', '9999999999', 'Dirección', 'Foto', '2024-04-04 04:44:29', '2024-04-04 04:59:04');
+
 -- --------------------------------------------------------
 
 --
@@ -352,7 +394,7 @@ CREATE TABLE `transport_types` (
 INSERT INTO `transport_types` (`id`, `type`, `created_at`, `updated_at`) VALUES
 (1, 'Nueva camioneta 1', '2024-03-29 05:13:25', '2024-03-29 06:42:45'),
 (2, 'Camioneta Uno', '2024-03-29 05:39:36', '2024-03-29 05:39:36'),
-(3, 'Camioneta 1', '2024-03-29 05:45:20', '2024-03-29 05:45:20');
+(3, 'Camioneta 2', '2024-03-29 05:45:20', '2024-04-03 04:10:38');
 
 -- --------------------------------------------------------
 
@@ -423,7 +465,12 @@ INSERT INTO `user_elements` (`id`, `id_user`, `id_element`, `created_at`, `updat
 (1, 1, 1, '2024-04-02 03:50:20', '2024-04-02 03:50:20'),
 (2, 1, 2, '2024-04-02 03:58:27', '2024-04-02 03:58:27'),
 (3, 1, 3, '2024-04-02 03:58:44', '2024-04-02 03:58:44'),
-(4, 1, 5, '2024-04-02 20:48:05', '2024-04-02 20:48:05');
+(4, 1, 5, '2024-04-02 20:48:05', '2024-04-02 20:48:05'),
+(5, 1, 6, '2024-04-03 18:01:52', '2024-04-03 18:01:52'),
+(6, 1, 7, '2024-04-03 19:19:51', '2024-04-03 19:19:51'),
+(7, 1, 8, '2024-04-03 19:58:28', '2024-04-03 19:58:28'),
+(8, 1, 9, '2024-04-03 22:43:05', '2024-04-03 22:43:05'),
+(9, 1, 10, '2024-04-03 23:38:28', '2024-04-03 23:38:28');
 
 -- --------------------------------------------------------
 
@@ -613,7 +660,7 @@ ALTER TABLE `vehicles`
 -- AUTO_INCREMENT de la tabla `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `companies`
@@ -637,13 +684,13 @@ ALTER TABLE `deliveries`
 -- AUTO_INCREMENT de la tabla `elements`
 --
 ALTER TABLE `elements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `facilities`
 --
 ALTER TABLE `facilities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `fuel_trips`
@@ -655,7 +702,7 @@ ALTER TABLE `fuel_trips`
 -- AUTO_INCREMENT de la tabla `fuel_types`
 --
 ALTER TABLE `fuel_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `groupers`
@@ -673,7 +720,7 @@ ALTER TABLE `incidents`
 -- AUTO_INCREMENT de la tabla `incident_types`
 --
 ALTER TABLE `incident_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `locations`
@@ -703,7 +750,7 @@ ALTER TABLE `profile_elements`
 -- AUTO_INCREMENT de la tabla `responsibles`
 --
 ALTER TABLE `responsibles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `transport_types`
@@ -727,7 +774,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `user_elements`
 --
 ALTER TABLE `user_elements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `vehicles`
