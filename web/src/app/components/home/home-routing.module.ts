@@ -68,6 +68,14 @@ const routes: Routes = [
         path: 'facilities',
         loadChildren: () => import('../facility/facility.module').then(m => m.FacilityModule)
       },
+      {
+        path: 'incidents',
+        loadChildren: () => import('../incident/incident.module').then(m => m.IncidentModule)
+      },
+      {
+        path: 'deliveries',
+        loadChildren: () => import('../delivery/delivery.module').then(m => m.DeliveryModule)
+      },
       // { path: 'helpdesk', component:  },
       { path: 'not-found', component: NotFoundComponent }
     ]

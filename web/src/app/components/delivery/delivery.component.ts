@@ -57,20 +57,24 @@ export class DeliveryComponent
         property: 'id_point', //Este es para la relacion
       },
       {
-        label: 'Nro. Económico',
-        property: 'economic_number',
+        label: 'Descripcion',
+        property: 'description',
       },
       {
-        label: 'Nro. Placas',
-        property: 'plates',
+        label: 'Documento',
+        property: 'document',
       },
       {
-        label: 'Marca',
-        property: 'brand',
+        label: 'Fecha',
+        property: 'date',
       },
       {
-        label: 'Color',
-        property: 'color',
+        label: 'Hora',
+        property: 'time',
+      },
+      {
+        label: 'Recepcionista',
+        property: 'receptionist',
       },
     ];
     this.selectedOption = 'id_point';
@@ -125,17 +129,11 @@ export class DeliveryComponent
     this.entity = {
       id: 0,
       id_point: null, //Este es para la relacion
-      economic_number: null,
-      num_license: null,
-      plates: null,
-      brand: null,
-      modelo: null,
-      year: null,
-      color: '#ffffff',
-      insurance_carrier: null,
-      insurance_policy: null,
-      km_x_liter: 0,
-      capacity: 0,
+      description: null,
+      document: null,
+      date: null,
+      time: null,
+      receptionist: null,
       created_at: new Date().toDateString(),
       updated_at: new Date().toDateString(),
     };
@@ -173,11 +171,11 @@ export class DeliveryComponent
 
   changeSelected() {
     this.params['id_point '] = null; //Este es para la relacion
-    this.params['economic_number'] = null;
-    this.params['num_license'] = null;
-    this.params['plates'] = null;
-    this.params['brand'] = null;
-    this.params['color'] = null;
+    this.params['description'] = null;
+    this.params['document'] = null;
+    this.params['date'] = null;
+    this.params['time'] = null;
+    this.params['receptionist'] = null;
   }
 
 }

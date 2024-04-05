@@ -1,0 +1,91 @@
+<h1 mat-dialog-title *ngIf="data.options.update && !readonly; else newone">Actualizar entrega "{{data.temporal.id}}"</h1>
+<ng-template #newone>
+    <h1 mat-dialog-title *ngIf="!readonly; else detail">Nueva Entrega</h1>
+</ng-template>
+<ng-template #detail>
+    <h1 mat-dialog-title>Detalles de la Entrega: "{{data.entity.id}}"</h1>
+</ng-template>
+<div mat-dialog-content>
+    <form role="form" #userForm="ngForm">
+        <p class="small-text">Información General</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default form-group-default-select2 required" pgFormGroupDefault>
+                    <label>Punto</label>
+                    <pg-select (SearchChange)="searchTypes($event)" style="width: 100%;" [(ngModel)]="data.entity.id_point"
+                        name="id_point" id="id_point" [PlaceHolder]="'Seleccione el Punto'" ShowSearch="true"
+                        NotFoundContent="Punto no encontrado" #id_point="ngModel" required [disabled]="readonly">
+                        <pg-option *ngFor="let point of Points" [Label]="point.id" [Value]="point.id">
+                        </pg-option>
+                    </pg-select>
+                </div>
+                <div *ngIf="id_point.invalid && (id_point.dirty || id_point.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Descripción</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.description" name="description" id="description" placeholder="Ingrese la Descripción" #description="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="description.invalid && (description.dirty || description.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Documento</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.document" name="document" id="document" placeholder="Ingrese el Documento" #document="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="document.invalid && (document.dirty || document.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Fecha</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.date" name="date" id="date" placeholder="Ingrese la Fecha de Entrega" #date="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="date.invalid && (date.dirty || date.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>time</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.time" name="time" id="time" placeholder="Ingrese la hora de Entrega" #time="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="time.invalid && (time.dirty || time.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Recepcionista</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.receptionist" name="receptionist" id="receptionist" placeholder="Ingrese el Recepcionista" #receptionist="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="receptionist.invalid && (receptionist.dirty || receptionist.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+</div>
+<mat-dialog-actions align="center">
+    <button aria-label="" type="button" class="btn btn-cons btn-animated from-top btn-lg font-medium px-3 py-2 border rounded-md" cdkFocusInitial (click)="onCancel(!readonly)">
+        <span>{{ readonly ? 'Volver' : 'Cancelar' }}</span>
+        <span class="hidden-block">
+            <i class="pg-icon">{{ readonly ? 'undo' : 'close' }}</i>
+        </span>
+    </button>
+    <button aria-label="" [hidden]="readonly" [disabled]="userForm.invalid" type="button" class="btn btn-primary btn-cons btn-animated from-top btn-lg font-medium px-3 py-2 border rounded-md" [mat-dialog-close]="data.entity"         [style.background-color]="data.configuration.primary_color"
+                        [style.border-color]="data.configuration.primary_color"
+                        (mouseover)="data.configuration.primary_color = data.configuration.calculate_hover_primary_color()"
+                        (mouseleave)="data.configuration.primary_color = data.configuration.primary_color_back">
+        <span>Aceptar</span>
+        <span class="hidden-block">
+            <i class="pg-icon">save</i>
+        </span>
+    </button>
+</mat-dialog-actions>
