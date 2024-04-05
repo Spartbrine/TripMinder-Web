@@ -42,7 +42,7 @@ export class IncidentComponent
   constructor(
     public service: IncidentService,
     public auth: AuthenticationService,
-    public incidentService: IncidentTypeService, //Relacion
+    public incidentTypeService: IncidentTypeService, //Relacion
     public tripService: TripService, //Relacion
 
     public dialog: MatDialog,
@@ -154,7 +154,7 @@ export class IncidentComponent
 
     this.user = JSON.parse(localStorage.getItem('user')) as User;
     //Llenamos la lista
-    this.incidentService
+    this.incidentTypeService
       .list()
       .subscribe(response => (this.incidentTypes = response.data.data)); //relacion
 

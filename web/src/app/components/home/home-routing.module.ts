@@ -76,6 +76,10 @@ const routes: Routes = [
         path: 'deliveries',
         loadChildren: () => import('../delivery/delivery.module').then(m => m.DeliveryModule)
       },
+      {
+        path: 'trips',
+        loadChildren: () => import('../trip/trip.module').then(m => m.TripModule)
+      },
       // { path: 'helpdesk', component:  },
       { path: 'not-found', component: NotFoundComponent }
     ]

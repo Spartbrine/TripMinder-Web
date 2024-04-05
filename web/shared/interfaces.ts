@@ -588,7 +588,7 @@ export interface Incident extends Model {
   latitude: string,
   date: string,
   trips?: Trip,
-  incidents: IncidentType
+  incidents?: IncidentType
 }
 
 

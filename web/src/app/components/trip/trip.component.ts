@@ -9,6 +9,7 @@ import {
   Vehicle,
   Trip,
   Configuration,
+  Responsible,
 } from 'shared/interfaces';
 import { AuthenticationService } from 'shared/services/authentication.service';
 import {
@@ -24,26 +25,29 @@ import { Profile } from 'shared/constants';
 import jspdf from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { ConfigurationService } from 'src/app/services/configuration.service'
+import { ResponsibleService } from 'src/app/services/responsible.service';
 @Component({
-  selector: 'app-incident',
-  templateUrl: './incident.component.html',
-  styleUrls: ['./incident.component.scss']
+  selector: 'app-trip',
+  templateUrl: './trip.component.html',
+  styleUrls: ['./trip.component.scss']
 })
-export class IncidentComponent
-  extends Catalog<Incident, IncidentDialogComponent>
+export class TripComponent
+  extends Catalog<Trip, TripDialogComponent>
   implements OnInit {
-  params: FilterParams<Incident>;
-  filterOptions: FilterOption<Incident>[];
-  selectedOption: keyof Incident | any;
-  incidentTypes: IncidentType[]; //Relacion
-  trips: Trip[]; //Relacion
+  params: FilterParams<Trip>;
+  filterOptions: FilterOption<Trip>[];
+  selectedOption: keyof Trip | any;
+  facilities: Facility[]; //Relacion
+  vehicles: Vehicle[]; //Relacion
+  responsibles: Responsible[]; //Relacion
 
   declare configuration: Configuration
   constructor(
-    public service: IncidentService,
+    public service: TripService,
     public auth: AuthenticationService,
-    public incidentService: IncidentTypeService, //Relacion
-    public tripService: TripService, //Relacion
+    public vehicleService: VehicleService, //Relacion
+    public facilityService: FacilityService, //Relacion
+    public responsibleService: ResponsibleService, //Relacion
 
     public dialog: MatDialog,
     public configurationService: ConfigurationService
@@ -60,28 +64,44 @@ export class IncidentComponent
 
     this.filterOptions = [
       {
-        label: 'Viaje',
-        property: 'id_trip',
+        label: 'Instalación',
+        property: 'id_facility',
       },
       {
-        label: 'Tipo incidente',
-        property: 'id_incident_type',
+        label: 'Vehiculo',
+        property: 'id_vehicle',
       },
       {
-        label: 'Descripcion',
-        property: 'description',
+        label: 'Responsable',
+        property: 'id_responsible',
       },
       {
-        label: 'Longitud',
-        property: 'longitude',
-      },
-      {
-        label: 'Latitud',
-        property: 'latitude',
+        label: 'Nombre',
+        property: 'name',
       },
       {
         label: 'Fecha',
         property: 'date',
+      },
+      {
+        label: 'Millas iniciales',
+        property: 'initial_mileage',
+      },
+      {
+        label: 'Gasolina inicial',
+        property: 'initial_fuel',
+      },
+      {
+        label: 'Estatus',
+        property: 'status',
+      },
+      {
+        label: 'Millas finales',
+        property: 'final_mileage',
+      },
+      {
+        label: 'Gasolina final',
+        property: 'final_fuel',
       },
     ];
     this.selectedOption = 'id_trip';
@@ -103,21 +123,21 @@ export class IncidentComponent
     '#000000',
   ];
 
-  protected validateExtras(result: Incident) {
+  protected validateExtras(result: Trip) {
     result.updated_at = new Date().toDateString();
     return result;
   }
 
-  protected getIdFrom(result: Incident): number {
+  protected getIdFrom(result: Trip): number {
     return result.id;
   }
 
-  protected search(id?: number): Incident {
+  protected search(id?: number): Trip {
     return this.entities.find(e => e.id == id);
   }
 
-  protected getRefDialog(dialogData: DialogData<Incident, any>) {
-    return this.dialog.open(IncidentDialogComponent, {
+  protected getRefDialog(dialogData: DialogData<Trip, any>) {
+    return this.dialog.open(TripDialogComponent, {
       width: '80%',
       data: dialogData,
       disableClose: true,
@@ -135,45 +155,80 @@ export class IncidentComponent
   protected restore(): void {
     this.entity = {
       id: 0,
-      id_trip: null,
-      id_incident_type: null,
-      description: null,
-      longitude: null,
-      latitude: null,
+      id_facility: null,
+      id_vehicle: null,
+      id_responsible: null,
+      name: null,
       date: null,
+      initial_mileage: null,
+      initial_fuel: null,
+      status: null,
+      final_mileage: null,
+      final_fuel: null,
       created_at: new Date().toDateString(),
       updated_at: new Date().toDateString(),
     };
   }
 
   ngOnInit() {
-    this.auth.checkPermission('/incidents')
+    this.auth.checkPermission('/trips')
     this.logged =
       typeof this.auth.currentUserValue === 'string' &&
       this.auth.currentUserValue !== '';
 
     this.user = JSON.parse(localStorage.getItem('user')) as User;
     //Llenamos la lista
-    this.incidentService
+    this.facilityService
       .list()
-      .subscribe(response => (this.incidentTypes = response.data.data)); //relacion
+      .subscribe(response => (this.facilities = response.data.data )); //relacion
+      
+      this.vehicleService
+      .list()
+      .subscribe(response => (this.vehicles = response.data.data )); //relacion
 
+      this.responsibleService
+      .list()
+      .subscribe(response => (this.responsibles = response.data.data)); //relacion
+      
     this.restore();
     this.reload(false, this.params);
   }
 
   searchTypes(text: string) {
     if (text.length == 0) {
-      this.incidentTypeService //relacion
+      this.facilityService //relacion
         .list()
-        .subscribe(response => (this.incidentTypes = response.data.data));
+        .subscribe(response => (this.facilities = response.data.data));
     } else {
-      this.incidentTypeService //RELACION
+      this.facilityService //RELACION
         .search(text)
-        .subscribe(response => (this.incidentTypes = response.data.data));
+        .subscribe(response => (this.facilities = response.data.data));
     }
   }
 
+  searchVehicles(text: string) {
+    if (text.length == 0) {
+      this.vehicleService //RELACION
+        .list()
+        .subscribe(response => (this.vehicles = response.data.data));
+    } else {
+      this.vehicleService //RELACION
+        .search(text)
+        .subscribe(response => (this.vehicles = response.data.data));
+    }
+  }
+
+  searchResponsibles(text: string) {
+    if (text.length == 0) {
+      this.responsibleService //RELACION
+        .list()
+        .subscribe(response => (this.responsibles = response.data.data));
+    } else {
+      this.responsibleService //RELACION
+        .search(text)
+        .subscribe(response => (this.responsibles = response.data.data));
+    }
+  }
   
 
   changeSelected() {
@@ -188,19 +243,21 @@ export class IncidentComponent
 }
 
 @Component({
-  selector: 'app-incident-dialog',
-  templateUrl: './incident-dialog.component.html',
-  styleUrls: ['./incident.component.scss'],
+  selector: 'app-trip-dialog',
+  templateUrl: './trip-dialog.component.html',
+  styleUrls: ['./trip.component.scss'],
 })
-export class IncidentDialogComponent extends DialogBase implements OnInit {
-  incidentTypes: IncidentType[]; //RELACION
-  trips: Trip[]; //RELACION
+export class TripDialogComponent extends DialogBase implements OnInit {
+  facilities: Facility[]; //RELACION
+  responsibles: Responsible[]; //RELACION
+  vehicles: Vehicle[]; //RELACION
 
   constructor(
-    public incidentTypeService: IncidentTypeService, //Relacion    
-    public tripService: TripService, //Relacion    
-    public dialogRef: MatDialogRef<IncidentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData<Incident, null>
+    public facilityService: FacilityService, //Relacion    
+    public responsibleService: ResponsibleService, //Relacion    
+    public vehicleService: VehicleService, //Relacion    
+    public dialogRef: MatDialogRef<TripComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData<Trip, null>
   ) {
     super(dialogRef);
   }
@@ -224,18 +281,19 @@ export class IncidentDialogComponent extends DialogBase implements OnInit {
     return this.data.options.readonly;
   }
   ngOnInit() {
-    this.incidentTypeService //RELACION
+    this.facilityService //RELACION
       .list()
-      .subscribe(response => (this.incidentTypes = response.data.data)); //RELACION
+      .subscribe(response => (this.facilities = response.data.data)); //RELACION
     
-      this.tripService //RELACION
+      this.vehicleService //RELACION
       .list()
-      .subscribe(response => (this.trips = response.data.data)); //RELACION
+      .subscribe(response => (this.vehicles = response.data.data)); //RELACION
 
-    const { entity } = this.data;
-    if (this.data.entity.color == '') {
-      this.data.entity.color = '#ffffff';
-    }
+      this.responsibleService //RELACION
+      .list()
+      .subscribe(response => (this.responsibles = response.data.data)); //RELACION
+
+  
     
    
     
@@ -243,24 +301,37 @@ export class IncidentDialogComponent extends DialogBase implements OnInit {
 
   searchTypes(text: string) {
     if (text.length == 0) {
-      this.incidentTypeService //RELACION
+      this.facilityService //relacion
         .list()
-        .subscribe(response => (this.incidentTypes = response.data.data));
+        .subscribe(response => (this.facilities = response.data.data));
     } else {
-      this.incidentTypeService //RELACION
+      this.facilityService //RELACION
         .search(text)
-        .subscribe(response => (this.incidentTypes = response.data.data));
+        .subscribe(response => (this.facilities = response.data.data));
     }
   }
-  searchTrips(text: string) {
+
+  searchVehicles(text: string) {
     if (text.length == 0) {
-      this.tripService //RELACION
+      this.vehicleService //RELACION
         .list()
-        .subscribe(response => (this.trips = response.data.data));
+        .subscribe(response => (this.vehicles = response.data.data));
     } else {
-      this.tripService //RELACION
+      this.vehicleService //RELACION
         .search(text)
-        .subscribe(response => (this.trips = response.data.data));
+        .subscribe(response => (this.vehicles = response.data.data));
+    }
+  }
+
+  searchResponsibles(text: string) {
+    if (text.length == 0) {
+      this.responsibleService //RELACION
+        .list()
+        .subscribe(response => (this.responsibles = response.data.data));
+    } else {
+      this.responsibleService //RELACION
+        .search(text)
+        .subscribe(response => (this.responsibles = response.data.data));
     }
   }
 

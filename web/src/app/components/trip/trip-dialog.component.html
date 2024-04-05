@@ -1,0 +1,136 @@
+<h1 mat-dialog-title *ngIf="data.options.update && !readonly; else newone">Actualizar Viaje "{{data.temporal.id}}"</h1>
+<ng-template #newone>
+    <h1 mat-dialog-title *ngIf="!readonly; else detail">Nuevo Viaje</h1>
+</ng-template>
+<ng-template #detail>
+    <h1 mat-dialog-title>Detalles del Viaje: "{{data.entity.id}}"</h1>
+</ng-template>
+<div mat-dialog-content>
+    <form role="form" #userForm="ngForm">
+        <p class="small-text">Información General</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default form-group-default-select2 required" pgFormGroupDefault>
+                    <label>Instalación</label>
+                    <pg-select (SearchChange)="searchTypes($event)" style="width: 100%;" [(ngModel)]="data.entity.id_facility"
+                        name="id_facility" id="id_facility" [PlaceHolder]="'Seleccione la Instalación'" ShowSearch="true"
+                        NotFoundContent="Instalación no encontrada" #id_facility="ngModel" required [disabled]="readonly">
+                        <pg-option *ngFor="let facility of facilities" [Label]="facility.id" [Value]="facility.id">
+                        </pg-option>
+                    </pg-select>
+                </div>
+                <div *ngIf="id_facility.invalid && (id_facility.dirty || id_facility.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default form-group-default-select2 required" pgFormGroupDefault>
+                    <label>Responsable</label>
+                    <pg-select (SearchChange)="searchTypes($event)" style="width: 100%;" [(ngModel)]="data.entity.id_responsible"
+                        name="id_responsible" id="id_responsible" [PlaceHolder]="'Seleccione el Responsable'" ShowSearch="true"
+                        NotFoundContent="Responsable no encontrado" #id_responsible="ngModel" required [disabled]="readonly">
+                        <pg-option *ngFor="let responsible of responsibles" [Label]="responsible.id" [Value]="responsible.id">
+                        </pg-option>
+                    </pg-select>
+                </div>
+                <div *ngIf="id_responsible.invalid && (id_responsible.dirty || id_responsible.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default form-group-default-select2 required" pgFormGroupDefault>
+                    <label>Vehículo</label>
+                    <pg-select (SearchChange)="searchTypes($event)" style="width: 100%;" [(ngModel)]="data.entity.id_vehicle"
+                        name="id_vehicle" id="id_vehicle" [PlaceHolder]="'Seleccione el Vehículo'" ShowSearch="true"
+                        NotFoundContent="Vehículo no encontrado" #id_vehicle="ngModel" required [disabled]="readonly">
+                        <pg-option *ngFor="let vehicle of vehicles" [Label]="vehicle.type" [Value]="vehicle.id">
+                        </pg-option>
+                    </pg-select>
+                </div>
+                <div *ngIf="id_vehicle.invalid && (id_vehicle.dirty || id_vehicle.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>  
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.name" name="name" id="name" placeholder="Ingrese un Nombre" #name="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Fecha</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.date" name="date" id="date" placeholder="Ingrese la Fecha" #date="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="date.invalid && (date.dirty || date.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Millaje Inicial</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.initial_mileage" name="initial_mileage" id="initial_mileage" placeholder="Millaje Inicial" #initial_mileage="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="initial_mileage.invalid && (initial_mileage.dirty || initial_mileage.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Gasolina Inicial</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.initial_fuel" name="initial_fuel" id="initial_fuel" placeholder="Ingrese la Gasolina Inicial" #initial_fuel="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="initial_fuel.invalid && (initial_fuel.dirty || initial_fuel.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Estatus</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.status" name="status" id="status" placeholder="Ingrese el Estatus" #status="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="status.invalid && (status.dirty || status.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Millaje Final</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.final_mileage" name="final_mileage" id="final_mileage" placeholder="Ingrese el Millaje Final" #final_mileage="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="final_mileage.invalid && (final_mileage.dirty || final_mileage.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group form-group-default required" pgFormGroupDefault>
+                    <label>Gasolina Final</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.entity.final_fuel" name="final_fuel" id="final_fuel" placeholder="Ingrese la Gasolina Final" #final_fuel="ngModel" required [disabled]="readonly">
+                </div>
+                <div *ngIf="final_fuel.invalid && (final_fuel.dirty || final_fuel.touched)">
+                    <label class="error">Este campo es requerido.</label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<mat-dialog-actions align="center">
+    <button aria-label="" type="button" class="btn btn-cons btn-animated from-top btn-lg font-medium px-3 py-2 border rounded-md" cdkFocusInitial (click)="onCancel(!readonly)">
+        <span>{{ readonly ? 'Volver' : 'Cancelar' }}</span>
+        <span class="hidden-block">
+            <i class="pg-icon">{{ readonly ? 'undo' : 'close' }}</i>
+        </span>
+    </button>
+    <button aria-label="" [hidden]="readonly" [disabled]="userForm.invalid" type="button" class="btn btn-primary btn-cons btn-animated from-top btn-lg font-medium px-3 py-2 border rounded-md" [mat-dialog-close]="data.entity"         [style.background-color]="data.configuration.primary_color"
+                        [style.border-color]="data.configuration.primary_color"
+                        (mouseover)="data.configuration.primary_color = data.configuration.calculate_hover_primary_color()"
+                        (mouseleave)="data.configuration.primary_color = data.configuration.primary_color_back">
+        <span>Aceptar</span>
+        <span class="hidden-block">
+            <i class="pg-icon">save</i>
+        </span>
+    </button>
+</mat-dialog-actions>
