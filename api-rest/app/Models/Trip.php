@@ -17,7 +17,8 @@ class Trip extends Model
         'initial_fuel',
         'status',
         'final_mileage',
-        'final_fuel'
+        'final_fuel',
+        'name'
     ];
     public function facility()
     {

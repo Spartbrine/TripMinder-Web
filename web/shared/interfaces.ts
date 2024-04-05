@@ -1,6 +1,7 @@
 /* Pages types ⬇⬇⬇ */
 
 import { extend } from 'hammerjs';
+import { Point } from 'jspdf';
 import { ShareReplayConfig } from 'rxjs/internal/operators/shareReplay';
 
 export interface MenuLink {
@@ -517,14 +518,14 @@ export interface Vehicle extends Model {
   num_license: string,
   plates: string,
   brand: string,
-  model: string,
+  modelo: string,
   year: number,
   color: string,
   insurance_carrier: string,
   insurance_policy: string,
   km_x_liter: number,
   capacity:number,
-  transport_type?: TransportType,
+  transportTypes?: TransportType,
 }
 export interface IncidentType extends Model {
   name: string,
@@ -556,4 +557,38 @@ export interface Facility extends Model {
   address: string,
 
 }
+export interface Point extends Model {
+  id_point: string,
+  status: string,
+  arrival_time : string,
+  arrival_date: string,
+  km_arrival : string,
+  fuel_arrival: string,
+  longitude: string,
+  latitude : string,
+  address: string,
+  name: string,
+  trips?: Trip
+}
+export interface Delivery extends Model {
+  id_point: string,
+  description: string,
+  document: string,
+  date: string,
+  time: string,
+  receptionist: string,
+  points?: Point
+}
+
+export interface Incident extends Model {
+  id_trip: string,
+  id_incident_type: string,
+  description : string,
+  longitude: string,
+  latitude: string,
+  date: string,
+  trips?: Trip,
+  incidents: IncidentType
+}
+
 

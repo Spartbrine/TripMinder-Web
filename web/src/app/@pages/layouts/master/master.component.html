@@ -63,8 +63,6 @@
                         <!--div class="dropdown-divider" *ngIf="isTeacher"></div>
                         <a class="dropdown-item" [routerLink]="['/profile']" *ngIf="isTeacher">Perfil</a-->
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" [routerLink]="['/account']">Cuenta</a>
-                        <a class="dropdown-item" [routerLink]="['/config']" *ngIf="isAdmin">Ajustes</a>
                         <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Salir</a>
                     </div>
                 </div>

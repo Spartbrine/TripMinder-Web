@@ -14,7 +14,7 @@ class Vehicle extends Model
         'num_license',
         'plates',
         'brand',
-        'model',
+        'modelo',
         'year',
         'color',
         'insurance_carrier',

@@ -30,7 +30,8 @@ class TripController extends CatalogController
             'initial_fuel'=>'required',
             'status'=>'required',
             'final_mileage'=>'required',
-            'final_fuel'=>'required'
+            'final_fuel'=>'required',
+            'name'=> 'required'
         ]);
 
         return $validator;
@@ -84,9 +85,11 @@ class TripController extends CatalogController
         $input = json_decode($input, true);
         if (json_last_error() !== 0)
             return $this->sendError('JSON Invalid', ['Malformed JSON'], 406);
-        if (isset($input['type']) && $input['type'] !== '')
-            if (Trip::where('id', '!=', $id)->where('type', $input['type'])->first() != null) return $this->sendError('Validation error', 'Already exists the unit with this name', 409);
-            $object->type = $input['type'];
+        if (isset($input['name']) && $input['name'] !== '')
+            if (Trip::where('id', '!=', $id)->where('name', $input['name'])->first() != null) return $this->sendError('Validation error', 'Already exists the unit with this name', 409);
+            $object->type = $input['name'];
+
+
 
         $answer = $object->save();
 

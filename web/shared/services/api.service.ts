@@ -7,8 +7,8 @@ import moment from 'moment';
 
 export abstract class ApiService<T> {
 
-  //private readonly api: string = '/api';
-  private readonly api: string = 'https://api.valya.app/api';
+  private readonly api: string = '/api';
+  //private readonly api: string = 'https://api.valya.app/api';
   constructor(protected http: HttpClient) { }
 
   /**

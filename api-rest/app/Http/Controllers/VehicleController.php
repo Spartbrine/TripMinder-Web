@@ -26,7 +26,7 @@ class VehicleController extends CatalogController
             'num_license'=> 'required|string',
             'plates'=> 'required|string',
             'brand'=> 'required|string',
-            'model'=> 'required|string',
+            'modelo'=> 'required|string',
             'year'=> 'required',
             'color'=> 'required|string',
             'insurance_carrier'=> 'required|string',
@@ -104,8 +104,8 @@ class VehicleController extends CatalogController
             $object->plates = $input['plates'];
         if (isset($input['brand']) && $input['brand'] !== '')
             $object->brand = $input['brand'];
-        if (isset($input['model']) && $input['model'] !== '')
-            $object->model = $input['model'];
+        if (isset($input['modelo']) && $input['modelo'] !== '')
+            $object->modelo = $input['modelo'];
         if (isset($input['year']) && $input['year'] !== '')
             $object->year = $input['year'];
         if (isset($input['color']) && $input['color'] !== '')
