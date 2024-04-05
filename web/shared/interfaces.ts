@@ -592,3 +592,18 @@ export interface Incident extends Model {
 }
 
 
+export interface Trip extends Model {
+  id_facility: string,
+  id_vehicle: string,
+  id_responsible : string,
+  name: string,
+  date: string,
+  initial_mileage: string,
+  initial_fuel: string,
+  status: string,
+  final_mileage: string,
+  final_fuel : string,
+  facilities?: Facility,
+  vehicles?: Vehicle,
+  responsibles?: Responsible,
+}
