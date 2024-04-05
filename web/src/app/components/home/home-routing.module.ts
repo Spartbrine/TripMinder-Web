@@ -80,6 +80,10 @@ const routes: Routes = [
         path: 'trips',
         loadChildren: () => import('../trip/trip.module').then(m => m.TripModule)
       },
+      {
+        path: 'fueltrips',
+        loadChildren: () => import('../fuel-trip/fuel-trip.module').then(m => m.FuelTripModule)
+      },
       // { path: 'helpdesk', component:  },
       { path: 'not-found', component: NotFoundComponent }
     ]

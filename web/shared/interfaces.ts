@@ -607,3 +607,16 @@ export interface Trip extends Model {
   vehicles?: Vehicle,
   responsibles?: Responsible,
 }
+export interface FuelTrip extends Model {
+  id_vehicle: string,
+  id_trip: string,
+  id_fuel_type : string,
+  liters_filled: string,
+  initial_fuel: string,
+  price_per_liter: string,
+  total_fill: string,
+  fill_date: string,
+  vehicles?: Vehicle,
+  trips?: Trip,
+  fuelTypes?: FuelType
+}

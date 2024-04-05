@@ -81,34 +81,50 @@ class TripController extends CatalogController
         if ($input == null) {
             return $this->sendError('JSON Invalid', ['Input needed'], 406);
         }
-
         $input = json_decode($input, true);
+
+        $inputValidator = $input;
+
+        $validator = $this->validator((array)$inputValidator);
+
+        if ($validator->fails()) return $this->sendError('Validation Error.', $validator->errors());
+
         if (json_last_error() !== 0)
             return $this->sendError('JSON Invalid', ['Malformed JSON'], 406);
         if (isset($input['name']) && $input['name'] !== '')
-            if (Trip::where('id', '!=', $id)->where('name', $input['name'])->first() != null) return $this->sendError('Validation error', 'Already exists the unit with this name', 409);
-            $object->type = $input['name'];
-
+            if (Trip::where('id', '!=', $id)->where('name', $input['name'])->first() != null)
+                return $this->sendError('Validation error', 'Already exists an vehicle with this name', 409);
+                $object->name = $input['name'];
+        if (isset($input['id_facility']) && $input['id_facility'] !== '')
+            $object->id_facility = $input['id_facility'];
+        if (isset($input['id_vehicle']) && $input['id_vehicle'] !== '')
+            $object->id_vehicle = $input['id_vehicle'];
+        if (isset($input['id_responsible']) && $input['id_responsible'] !== '')
+            $object->id_responsible = $input['id_responsible'];
+        if (isset($input['date']) && $input['date'] !== '')
+            $object->date = $input['date'];
+        if (isset($input['initial_mileage']) && $input['initial_mileage'] !== '')
+            $object->initial_mileage = $input['initial_mileage'];
+        if (isset($input['initial_fuel']) && $input['initial_fuel'] !== '')
+            $object->initial_fuel = $input['initial_fuel'];
+        if (isset($input['status']) && $input['status'] !== '')
+            $object->status = $input['status'];
+        if (isset($input['final_mileage']) && $input['final_mileage'] !== '')
+            $object->final_mileage = $input['final_mileage'];
+        if (isset($input['final_fuel']) && $input['final_fuel'] !== '')
+            $object->final_fuel = $input['final_fuel'];
+        if (isset($input['name']) && $input['name'] !== '')
+            $object->name = $input['name'];
 
 
         $answer = $object->save();
-
         if ($answer) {
             if ($object->id_facility > 0)
                 $object->facility = Facility::find($input['id_facility']);
-            return response()->json($object, 200);
-        }
-        if ($answer) {
             if ($object->id_vehicle > 0)
                 $object->vehicle = Vehicle::find($input['id_vehicle']);
-            return response()->json($object, 200);
-        }
-        if ($answer) {
             if ($object->id_responsible > 0)
                 $object->responsible = Responsible::find($input['id_responsible']);
-            return response()->json($object, 200);
-        }
-        if ($answer) {
             return response()->json($object, 200);
         }
         return $this->sendError('Update error', ['The object update is not valid'], 500);

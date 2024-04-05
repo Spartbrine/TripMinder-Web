@@ -1,0 +1,102 @@
+<div class="container-fluid container-fixed-lg bg-white" *ngIf="configuration">
+    <div class="card card-transparent cardmargen">
+        <div class="card-header">
+            
+            <div class="card-title">
+                <div class="align-items-end justify-content-between"><h3>Llenado de Gasolina</h3></div>
+            </div>
+            
+            <div class="pull-right ">                     
+                <div class="col-xs-12 inline-block text-left" >                    
+                    <button style="margin-right: 10px" class="btn btn-light btn-lg font-medium px-3 py-2 border rounded-md" (click)="toggleFilter()" >
+                          <i class="pg-icon">search</i> <!--Filtros-->
+                    </button>
+                    <button class="btn btn-primary btn-lg font-medium px-3 py-2 border rounded-md " [style.background-color]="configuration.primary_color"
+                        [style.border-color]="configuration.primary_color"
+                        (mouseover)="configuration.primary_color = configuration.calculate_hover_primary_color()"
+                        (mouseleave)="configuration.primary_color = configuration.primary_color_back" (click)="openDialog()">
+                      <i class="pg-icon">add</i> Nuevo Llenado de Gasolina
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body cardbodytop">
+        <div class="form-group input-group" *ngIf="filter">
+            <div class="input-group-append" *ngIf="selectedOption">
+                <button type="button" class="btn btn-default btn-icon btn-lg" (click)="cleanFilter()">
+                    <i class="pg-icon">close</i>
+                </button>
+            </div>
+            <div class="input-group-append">
+                <pg-select-fx style="width: 140px" [(ngModel)]="selectedOption" (ngModelChange)="changeSelected()" [PlaceHolder]="'Seleccione'" AllowClear>
+                    <pg-selectfx-option *ngFor="let option of filterOptions" [Label]="option.label" [Value]="option.property">
+                    </pg-selectfx-option>
+                </pg-select-fx>
+            </div>
+            
+                <input type="text" placeholder="Buscar..." class="form-control" [(ngModel)]="params[selectedOption]"  [style.border-color]="configuration.border_color_form"
+                    (focus)="configuration.border_color_form = configuration.primary_color"
+                    (blur)="configuration.border_color_form = configuration.border_color_form_back" *ngIf="!['perfil'].includes(selectedOption)">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-primary btn-icon btn-lg" [style.background-color]="configuration.search_primary_color"
+                            [style.border-color]="configuration.search_primary_color"
+                            (mouseover)="configuration.search_primary_color = configuration.search_calculate_hover_primary_color()"
+                            (mouseleave)="configuration.search_primary_color = configuration.search_primary_color_back" (click)="reload()" [disabled]="!selectedOption">
+                        <i class="pg-icon">search</i>
+                    </button>
+                </div>
+            
+            <app-filter-tags [params]="params" [filterOptions]="filterOptions" [selectedOption]="selectedOption" (removedParam)="reload()">
+            </app-filter-tags>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th class="center-item-table">Vehiculo</th>
+                        <th class="center-item-table">Viaje</th>
+                        <th class="center-item-table">Tipo de Combustible</th>
+                        <th class="center-item-table">Litros llenados</th>
+                        <th class="center-item-table">Combustible Inicial</th>
+                        <th class="center-item-table">Precio Por Litro</th>
+                        <th class="center-item-table">Llenado Completo</th>
+                        <th class="center-item-table">Fecha de llenado</th>
+                        <th class="center-item-table">Opciones</th>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of entities">
+                        <td id="type" class="center-item-table">{{row.vehicle?.id}}</td>
+                        <td id="type" class="center-item-table">{{row.trip?.id}}</td>
+                        <td id="type" class="center-item-table">{{row.fuel_type?.id}}</td>
+                        <td class="center-item-table">{{row.liters_filled}}</td>
+                        <td class="center-item-table">{{row.initial_fuel}}</td>
+                        <td class="center-item-table">{{row.price_per_liter}}</td>
+                        <td class="center-item-table">{{row.total_fill}}</td>
+                        <td class="center-item-table">{{row.fill_date}}</td>
+                        <td class="center-item-table">
+                            <div class="flex" style="justify-content: space-evenly;">
+                                <a (click)="openDialog(true, row.id, true)" class="clickeable">
+                                    <i class="pg-icon">list_bullets</i>
+                                </a>
+                                <a (click)="openDialog(true, row.id)" class="clickeable">
+                                    <i class="pg-icon">edit</i>
+                                </a>
+                                <a (click)="delete(row.id)" class="clickeable" >
+                                    <i class="pg-icon">trash_alt</i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="flex mb-4 pagination-table">
+                <button [disabled]="!hasPrevious()" (click)="previousPage()" class="btn btn-light btn-lg font-medium px-3 py-2 border rounded-md">Anterior</button>
+                <button [disabled]="!hasNext()" (click)="nextPage()" class="btn btn-light btn-lg font-medium px-3 py-2 border rounded-md">Siguiente</button>
+            </div>
+        </div>
+    </div>
+</div>
+
