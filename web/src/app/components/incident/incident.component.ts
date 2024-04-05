@@ -156,7 +156,7 @@ export class IncidentComponent
     //Llenamos la lista
     this.incidentService
       .list()
-      .subscribe(response => (this.incidentTypes = response.data.data)); //rlacion
+      .subscribe(response => (this.incidentTypes = response.data.data)); //relacion
 
     this.restore();
     this.reload(false, this.params);
